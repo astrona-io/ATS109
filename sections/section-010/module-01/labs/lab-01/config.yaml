@@ -1,0 +1,55 @@
+# Write A Perses Dashboard By Hand
+# Astrona graded lab. Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-lab-010-01"
+  docs:
+    guide: "solution.md"
+    solution: "solution.md"
+    question: "question.md"
+    examQuestion: "question.md"
+    prerequisites: "prerequisites.md"
+
+bootstrap:
+  init:
+    - name: "install-perses"
+      description: "Installs Helm 3.22.1, percli and Perses v0.54.0, Prometheus and Grafana 12.4.13"
+      type: "file"
+      source: "bootstrap/01-install-perses.sh"
+    - name: "ats-109-lab-010-01-setup"
+      description: "Creates the starting state the task works from"
+      type: "file"
+      source: "bootstrap/02-seed-state.sh"
+
+testing:
+  init:
+    - name: "wait-for-perses"
+      description: "Waits until Perses and Grafana answer from the tester pod"
+      type: "file"
+      source: "testing/wait-for-perses.sh"
+    - name: "reference-solution"
+      description: "The remediation a correct learner performs; used by `astrona test`"
+      type: "file"
+      source: "solution/apply.sh"
+
+validation:
+  scripts:
+    - name: "validate-dashboard-exists"
+      description: "Confirms the dashboard http-requests exists in the project specs and passes server validation"
+      type: "file"
+      source: "validation/validate-dashboard-exists.sh"
+    - name: "validate-panels-and-layout"
+      description: "Confirms one TimeSeriesChart and one StatChart, every layout reference resolving to a panel"
+      type: "file"
+      source: "validation/validate-panels-and-layout.sh"
+    - name: "validate-variable-and-time"
+      description: "Confirms the handler ListVariable and the 6h duration and 30s refresh of the Grafana dashboard"
+      type: "file"
+      source: "validation/validate-variable-and-time.sh"
+    - name: "validate-query-parity"
+      description: "Confirms both queries return the same series as the Grafana panels' queries"
+      type: "file"
+      source: "validation/validate-query-parity.sh"
+
+teardown:
+  keepCluster: false

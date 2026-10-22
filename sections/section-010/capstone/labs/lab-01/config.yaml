@@ -1,0 +1,55 @@
+# Repair A Hand-Written Dashboard
+# Astrona graded lab. Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-capstone-010"
+  docs:
+    guide: "solution.md"
+    solution: "solution.md"
+    question: "question.md"
+    examQuestion: "question.md"
+    prerequisites: "prerequisites.md"
+
+bootstrap:
+  init:
+    - name: "install-perses"
+      description: "Installs Helm 3.22.1, percli and Perses v0.54.0, Prometheus and Grafana 12.4.13"
+      type: "file"
+      source: "bootstrap/01-install-perses.sh"
+    - name: "ats-109-capstone-010-setup"
+      description: "Creates the starting state the task works from"
+      type: "file"
+      source: "bootstrap/02-seed-state.sh"
+
+testing:
+  init:
+    - name: "wait-for-perses"
+      description: "Waits until Perses and Grafana answer from the tester pod"
+      type: "file"
+      source: "testing/wait-for-perses.sh"
+    - name: "reference-solution"
+      description: "The remediation a correct learner performs; used by `astrona test`"
+      type: "file"
+      source: "solution/apply.sh"
+
+validation:
+  scripts:
+    - name: "validate-dashboard-applied"
+      description: "Confirms process-health exists in the project capstone and passes server validation"
+      type: "file"
+      source: "validation/validate-dashboard-applied.sh"
+    - name: "validate-layout-refs"
+      description: "Confirms every layout item points at a panel that exists and every panel is placed"
+      type: "file"
+      source: "validation/validate-layout-refs.sh"
+    - name: "validate-datasource-refs"
+      description: "Confirms every query uses the project datasource prometheus"
+      type: "file"
+      source: "validation/validate-datasource-refs.sh"
+    - name: "validate-queries-return-data"
+      description: "Confirms every panel query returns at least one series through the Perses proxy"
+      type: "file"
+      source: "validation/validate-queries-return-data.sh"
+
+teardown:
+  keepCluster: false

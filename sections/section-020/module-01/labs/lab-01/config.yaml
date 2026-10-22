@@ -1,0 +1,55 @@
+# Migrate Two Grafana Dashboards
+# Astrona graded lab. Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-lab-020-01"
+  docs:
+    guide: "solution.md"
+    solution: "solution.md"
+    question: "question.md"
+    examQuestion: "question.md"
+    prerequisites: "prerequisites.md"
+
+bootstrap:
+  init:
+    - name: "install-perses"
+      description: "Installs Helm 3.22.1, percli and Perses v0.54.0, Prometheus and Grafana 12.4.13"
+      type: "file"
+      source: "bootstrap/01-install-perses.sh"
+    - name: "ats-109-lab-020-01-setup"
+      description: "Creates the starting state the task works from"
+      type: "file"
+      source: "bootstrap/02-seed-state.sh"
+
+testing:
+  init:
+    - name: "wait-for-perses"
+      description: "Waits until Perses and Grafana answer from the tester pod"
+      type: "file"
+      source: "testing/wait-for-perses.sh"
+    - name: "reference-solution"
+      description: "The remediation a correct learner performs; used by `astrona test`"
+      type: "file"
+      source: "solution/apply.sh"
+
+validation:
+  scripts:
+    - name: "validate-dashboards-migrated"
+      description: "Confirms prometheus-overview and prometheus-storage exist in the project legacy and pass server validation"
+      type: "file"
+      source: "validation/validate-dashboards-migrated.sh"
+    - name: "validate-no-placeholders"
+      description: "Confirms no panel, query or variable is a migration placeholder"
+      type: "file"
+      source: "validation/validate-no-placeholders.sh"
+    - name: "validate-datasource-refs"
+      description: "Confirms every query uses the datasource prometheus or the project default"
+      type: "file"
+      source: "validation/validate-datasource-refs.sh"
+    - name: "validate-panel-count"
+      description: "Confirms every Grafana panel has a Perses panel: none was deleted to hide a placeholder"
+      type: "file"
+      source: "validation/validate-panel-count.sh"
+
+teardown:
+  keepCluster: false

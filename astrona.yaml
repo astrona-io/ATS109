@@ -1,0 +1,275 @@
+# Course manifest for ATS109 - Open Specification & Grafana Migration (Perses).
+#
+# One entry per section under `modules:`. Each section lists, in order: its
+# README, then for each module the landing page (course.md), its parts
+# (course-0N-*.md), and right after the part a lab tests, the lab's
+# question.md reading and the `type: lab` entry. The module's summary page
+# comes last. The section capstone closes the section. Playgrounds are not
+# listed: the landing page's playground marker shows them. solution.md is
+# never listed.
+#
+# Every `path:` is relative to this file.
+
+training:
+  id: ATS109
+  title: "Perses: Open Specification & Grafana Migration"
+  maturity: draft
+  description: >
+    Training material covering the Open Specification & Grafana Migration
+    domain of the Perses training path: the Perses dashboard specification
+    (panels, queries, layouts, variables, datasource references and plugin
+    schemas) compared with Grafana's dashboard JSON model, migrating Grafana
+    dashboards with percli migrate and the migrate API, finishing what the
+    migration cannot translate, and proving that a migrated dashboard shows
+    the same data as the original. Each module pairs a layered reader with an
+    ungraded hands-on playground and a graded practice lab. Each section
+    closes with an integration capstone.
+    Written for Perses v0.54.0 and Grafana 12.4.13.
+
+  certification:
+    name: Perses
+    code: PERSES
+    provider: Astrona
+    domain: Open Specification & Grafana Migration
+    weight: 15
+
+modules:
+
+  - id: module-intro
+    title: "Introduction"
+    description: >
+      Start here. What this course trains you to do, how it is laid out, how
+      to get your machine ready with the astrona command-line tool, how the
+      content is written and checked, who maintains it, and how to report a
+      mistake.
+
+    content:
+      - type: reading
+        title: Introduction
+        path: sections/intro/README.md
+      - type: reading
+        title: "Welcome To The Course"
+        path: sections/intro/course-01-welcome.md
+      - type: reading
+        title: "Get Your Machine Ready"
+        path: sections/intro/course-02-get-your-machine-ready.md
+      - type: reading
+        title: "How This Course Is Made"
+        path: sections/intro/course-03-how-this-course-is-made.md
+
+  - id: module-010
+    title: "The Perses Open Specification"
+    description: >
+      The Perses dashboard specification in detail: the resource envelope,
+      panels and their plugins, queries, Grid layouts and references,
+      variables, datasource references and scopes, and the plugin schemas the
+      server checks every dashboard against, side by side with Grafana's
+      dashboard JSON model.
+
+    content:
+      - type: reading
+        title: Section Overview
+        path: sections/section-010/README.md
+
+      - type: reading
+        title: "Read And Write The Perses Dashboard Specification"
+        path: sections/section-010/module-01/course.md
+      - type: reading
+        title: "What The Open Specification Is"
+        path: sections/section-010/module-01/course-01-what-the-open-specification-is.md
+      - type: reading
+        title: "Panels, Queries And Layouts"
+        path: sections/section-010/module-01/course-02-panels-queries-and-layouts.md
+      - type: reading
+        title: "Variables, Datasources And Plugin Schemas"
+        path: sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+      - type: reading
+        title: Question
+        path: sections/section-010/module-01/labs/lab-01/question.md
+      - type: lab
+        title: "Write A Perses Dashboard By Hand Lab"
+        path: sections/section-010/module-01/labs/lab-01
+        difficulty: beginner
+        estimated_duration: 20m
+        topic: specification
+        task_kind: build
+        tags: [dashboard-spec, panels, layouts, variables, grafana-json, query-parity]
+        learning_goals:
+          - Read a small Grafana dashboard and write the equivalent Perses dashboard by hand
+          - Reference every panel from a Grid layout and define the variable the queries use
+          - Prove the result with server validation and queries that return the Grafana panels' series
+        resources:
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+          - name: "Open specification"
+            url: https://perses.dev/perses/docs/concepts/open-specification/
+          - name: "Variable API"
+            url: https://perses.dev/perses/docs/api/variable/
+      - type: reading
+        title: Summary
+        path: sections/section-010/module-01/course-04-summary.md
+
+      - type: reading
+        title: Question
+        path: sections/section-010/capstone/labs/lab-01/question.md
+      - type: lab
+        title: "Repair A Hand-Written Dashboard Capstone"
+        path: sections/section-010/capstone/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: specification
+        task_kind: troubleshooting
+        tags: [dashboard-spec, layouts, plugin-schema, validation, datasource-ref, datasource-proxy]
+        learning_goals:
+          - Find why a dashboard file is refused or shows empty panels from the server's answer and the proxy
+          - Fix a broken layout reference, a value the plugin schema refuses, a wrong datasource name and a query with no data
+          - Prove the repair with server validation and data from every panel query
+        resources:
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+          - name: "Datasource API"
+            url: https://perses.dev/perses/docs/api/datasource/
+          - name: "Proxy"
+            url: https://perses.dev/perses/docs/concepts/proxy/
+
+  - id: module-020
+    title: "Migrating Grafana Dashboards"
+    description: >
+      How percli migrate and the migrate API turn a Grafana dashboard into a
+      Perses dashboard, which panels, queries and variables translate and
+      which become placeholders, what happens to rows, names and time ranges,
+      and how to finish a migration and apply it to a project.
+
+    content:
+      - type: reading
+        title: Section Overview
+        path: sections/section-020/README.md
+
+      - type: reading
+        title: "Migrate Grafana Dashboards With percli"
+        path: sections/section-020/module-01/course.md
+      - type: reading
+        title: "How Migration Works"
+        path: sections/section-020/module-01/course-01-how-migration-works.md
+      - type: reading
+        title: "Translating Panels And Variables"
+        path: sections/section-020/module-01/course-02-translating-panels-and-variables.md
+      - type: reading
+        title: "Finishing A Migration"
+        path: sections/section-020/module-01/course-03-finishing-a-migration.md
+      - type: reading
+        title: Question
+        path: sections/section-020/module-01/labs/lab-01/question.md
+      - type: lab
+        title: "Migrate Two Grafana Dashboards Lab"
+        path: sections/section-020/module-01/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: migration
+        task_kind: migration
+        tags: [percli-migrate, grafana-json, placeholder, panels, variables, datasource-ref]
+        learning_goals:
+          - Migrate two Grafana dashboards with percli migrate against the running Perses server
+          - Replace every placeholder panel and variable with a working Perses equivalent instead of deleting it
+          - Point every query at the project datasource and apply both dashboards to the project legacy
+        resources:
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/
+          - name: "Migrate API"
+            url: https://perses.dev/perses/docs/api/migrate/
+          - name: "Perses CLI"
+            url: https://perses.dev/perses/docs/cli/
+      - type: reading
+        title: Summary
+        path: sections/section-020/module-01/course-04-summary.md
+
+      - type: reading
+        title: Question
+        path: sections/section-020/capstone/labs/lab-01/question.md
+      - type: lab
+        title: "Migrate A Shared Dashboard Export Capstone"
+        path: sections/section-020/capstone/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: migration
+        task_kind: migration
+        tags: [percli-migrate, grafana-inputs, rows, custom-resource, placeholder, datasource-ref]
+        learning_goals:
+          - Migrate a Grafana export that uses an input for its datasource with --input
+          - Keep a collapsed Grafana row as its own closed group and replace the placeholders
+          - Produce the same dashboard as a PersesDashboard custom resource for the namespace shared
+        resources:
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/
+          - name: "Perses CLI"
+            url: https://perses.dev/perses/docs/cli/
+
+  - id: module-030
+    title: "Checking Query Parity"
+    description: >
+      Proving that a migrated dashboard shows the same data as the Grafana
+      original: running the same expression through both tools at the same
+      time, and the things that change the picture besides the query —
+      legends, units, calculations, thresholds, rate windows and the default
+      time range.
+
+    content:
+      - type: reading
+        title: Section Overview
+        path: sections/section-030/README.md
+
+      - type: reading
+        title: "Check That A Migrated Dashboard Shows The Same Data"
+        path: sections/section-030/module-01/course.md
+      - type: reading
+        title: "Running The Same Query In Both Tools"
+        path: sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+      - type: reading
+        title: "What Changes The Picture Besides The Query"
+        path: sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - type: reading
+        title: Question
+        path: sections/section-030/module-01/labs/lab-01/question.md
+      - type: lab
+        title: "Restore Query Parity After A Migration Lab"
+        path: sections/section-030/module-01/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 25m
+        topic: parity
+        task_kind: troubleshooting
+        tags: [query-parity, legend, calculations, datasource-proxy, grafana-json]
+        learning_goals:
+          - Compare every panel of a migrated dashboard with its Grafana original
+          - Fix a changed rate window, a changed legend format and a changed calculation in the Perses dashboard
+          - Prove parity by running both expressions at the same time and comparing the series
+        resources:
+          - name: "Proxy"
+            url: https://perses.dev/perses/docs/concepts/proxy/
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/
+      - type: reading
+        title: Summary
+        path: sections/section-030/module-01/course-03-summary.md
+
+      - type: reading
+        title: Question
+        path: sections/section-030/capstone/labs/lab-01/question.md
+      - type: lab
+        title: "Prove Parity For A Migrated Dashboard Capstone"
+        path: sections/section-030/capstone/labs/lab-01
+        difficulty: advanced
+        estimated_duration: 35m
+        topic: parity
+        task_kind: troubleshooting
+        tags: [query-parity, units, thresholds, time-range, datasource-proxy, grafana-json]
+        learning_goals:
+          - Check a migrated dashboard against its Grafana original panel by panel
+          - Fix a wrong unit, wrong thresholds, a query on the wrong metric and a lost time range
+          - Prove parity for the data and for what the panels show around it
+        resources:
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+          - name: "Proxy"
+            url: https://perses.dev/perses/docs/concepts/proxy/
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/

@@ -1,0 +1,26 @@
+# Helm values for Perses v0.54.0 (chart perses 0.23.3) in every ATS106
+# environment. One address everywhere: http://perses.localtest.me:8080.
+# Inside the cluster a CoreDNS rewrite sends that name to the Service
+# `perses` in the namespace `perses`; on the reader's machine a port-forward
+# of port 8080 does.
+fullnameOverride: perses
+image:
+  version: v0.54.0
+service:
+  type: ClusterIP
+  port: 8080
+config:
+  # Authentication is off at the start. Modules that teach it switch it on.
+  security:
+    readonly: false
+    enable_auth: false
+    cookie:
+      same_site: lax
+      secure: false
+  database:
+    file:
+      folder: /perses
+      extension: json
+# Lab environments are thrown away: no PersistentVolumeClaim.
+persistence:
+  enabled: false

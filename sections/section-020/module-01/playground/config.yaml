@@ -1,0 +1,24 @@
+# Migrate Grafana Dashboards With percli (PLAYGROUND) — Playground environment
+# A clean sandbox: it spins up, runs the preparation script, then stays
+# running for free exploration. No task, no grading, no `astrona submit`.
+# Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-playground-020-01"
+  docs:
+    guide: "docs/overview.md"
+
+bootstrap:
+  init:
+    - name: "prepare"
+      description: "Install Helm, percli, Grafana and Perses, add the CoreDNS rewrite, and create the starting resources."
+      type: "file"
+      source: "bootstrap/prepare.sh"
+  manifests:
+    - name: "lab-start"
+      description: "Prometheus and the tester pod (namespace observability)."
+      type: "file"
+      source: "manifests/lab-start.yaml"
+
+teardown:
+  keepCluster: false

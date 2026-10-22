@@ -1,0 +1,55 @@
+# Prove Parity For A Migrated Dashboard
+# Astrona graded lab. Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-capstone-030"
+  docs:
+    guide: "solution.md"
+    solution: "solution.md"
+    question: "question.md"
+    examQuestion: "question.md"
+    prerequisites: "prerequisites.md"
+
+bootstrap:
+  init:
+    - name: "install-perses"
+      description: "Installs Helm 3.22.1, percli and Perses v0.54.0, Prometheus and Grafana 12.4.13"
+      type: "file"
+      source: "bootstrap/01-install-perses.sh"
+    - name: "ats-109-capstone-030-setup"
+      description: "Creates the starting state the task works from"
+      type: "file"
+      source: "bootstrap/02-seed-state.sh"
+
+testing:
+  init:
+    - name: "wait-for-perses"
+      description: "Waits until Perses and Grafana answer from the tester pod"
+      type: "file"
+      source: "testing/wait-for-perses.sh"
+    - name: "reference-solution"
+      description: "The remediation a correct learner performs; used by `astrona test`"
+      type: "file"
+      source: "solution/apply.sh"
+
+validation:
+  scripts:
+    - name: "validate-unit-parity"
+      description: "Confirms every panel unit matches the Grafana unit mapping"
+      type: "file"
+      source: "validation/validate-unit-parity.sh"
+    - name: "validate-threshold-parity"
+      description: "Confirms the Error ratio thresholds match the Grafana steps"
+      type: "file"
+      source: "validation/validate-threshold-parity.sh"
+    - name: "validate-query-parity"
+      description: "Confirms every panel query returns the same series as its Grafana panel"
+      type: "file"
+      source: "validation/validate-query-parity.sh"
+    - name: "validate-time-range-parity"
+      description: "Confirms the default time range and refresh interval match Grafana"
+      type: "file"
+      source: "validation/validate-time-range-parity.sh"
+
+teardown:
+  keepCluster: false
