@@ -34,24 +34,42 @@ done
 
 `prometheus-overview` has two placeholder panels, `5` (`Request duration`, a Grafana `heatmap`) and `6` (`Target state`, a Grafana `state-timeline`), and one placeholder variable, `filter` (a Grafana `adhoc` filter). `prometheus-storage` has one placeholder panel, `4` (`Series against chunks`, a Grafana `xychart`). No query is a placeholder.
 
+A placeholder panel arrives without queries: the migration writes `queries: null` and keeps only the title and description. Read the expression of each one from the Grafana panel with the same position, because the panel key is that position in Grafana's `panels` list:
+
+```sh
+jq -c '.panels[5,6] | {title, type, targets: [.targets[] | {expr, legendFormat}]}' prometheus-overview.json
+jq -c '.panels[4] | {title, type, targets: [.targets[] | {expr, legendFormat}]}' prometheus-storage.json
+```
+
+`Request duration` reads `prometheus_http_request_duration_seconds_bucket`, `Target state` runs `up{job="$job"}` with the legend `{{instance}}`, and `Series against chunks` runs `prometheus_tsdb_head_series` and `prometheus_tsdb_head_chunks`.
+
 ## Step 3: Replace the placeholders
 
 Choose a Perses plugin for each placeholder panel:
 
-- `Request duration` showed the distribution of request durations. A `TimeSeriesChart` of the 90th percentile shows the same histogram as one line, so replace its query with a `histogram_quantile` over the same buckets.
-- `Target state` showed whether each target was up over time. `StatusHistoryChart` draws exactly that from the same query.
-- `Series against chunks` plotted two metrics against each other. A `TimeSeriesChart` with both queries shows both over time.
+- `Request duration` showed the distribution of request durations. A `TimeSeriesChart` of the 90th percentile shows the same histogram as one line, so give it one query: a `histogram_quantile` over the Grafana panel's buckets.
+- `Target state` showed whether each target was up over time. `StatusHistoryChart` draws exactly that from the Grafana panel's query.
+- `Series against chunks` plotted two metrics against each other. A `TimeSeriesChart` with both Grafana queries shows both over time.
 
-The `filter` variable has no Perses equivalent, and no query uses it, so remove it. Apply the changes with `jq`:
+Because the placeholders have no queries, set the whole `queries` list of each panel, not one field inside it. A query without a `datasource` uses the default datasource of the project, which is `prometheus`. The `filter` variable has no Perses equivalent, and no query uses it, so remove it. Apply the changes with `jq`:
 
 ```sh
 jq '.spec.panels["5"].spec.plugin = {"kind": "TimeSeriesChart", "spec": {"yAxis": {"format": {"unit": "seconds"}}}}
-    | .spec.panels["5"].spec.queries[0].spec.plugin.spec.query = "histogram_quantile(0.9, sum by (le) (rate(prometheus_http_request_duration_seconds_bucket{job=\"$job\"}[$interval])))"
-    | .spec.panels["5"].spec.queries[0].spec.plugin.spec.seriesNameFormat = "p90"
+    | .spec.panels["5"].spec.queries = [
+        {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {
+          "query": "histogram_quantile(0.9, sum by (le) (rate(prometheus_http_request_duration_seconds_bucket{job=\"$job\"}[$interval])))",
+          "seriesNameFormat": "p90"}}}}]
     | .spec.panels["6"].spec.plugin = {"kind": "StatusHistoryChart", "spec": {}}
+    | .spec.panels["6"].spec.queries = [
+        {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {
+          "query": "up{job=\"$job\"}",
+          "seriesNameFormat": "{{instance}}"}}}}]
     | .spec.variables |= map(select(.spec.name != "filter"))
     | .spec.duration = "3h" | .spec.refreshInterval = "1m"' prometheus-overview-migrated.json > prometheus-overview-ready.json
 jq '.spec.panels["4"].spec.plugin = {"kind": "TimeSeriesChart", "spec": {"legend": {"position": "bottom"}}}
+    | .spec.panels["4"].spec.queries = [
+        {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {"query": "prometheus_tsdb_head_series"}}}},
+        {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {"query": "prometheus_tsdb_head_chunks"}}}}]
     | .spec.duration = "24h"' prometheus-storage-migrated.json > prometheus-storage-ready.json
 ```
 
@@ -78,7 +96,7 @@ astrona submit -c sections/section-020/module-01/labs/lab-01
 
 | Shortcut | What happens |
 | --- | --- |
-| Delete the placeholder panels | The panel count no longer matches Grafana, and their queries are lost |
+| Delete the placeholder panels | The panel count no longer matches Grafana, and the panel's title and place in the layout are gone |
 | Create a datasource `prom-main` | Every query works, but the project has two names for one Prometheus; the task forbids it |
 | Leave the `filter` variable | It offers the values `grafana migration not supported` above the dashboard |
 | Migrate without `--online` and without `--plugin.path` | `percli` refuses: offline migration needs the plugins on your machine |

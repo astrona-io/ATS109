@@ -299,8 +299,14 @@ with the source if the version changes.
   `PieChart`; `status-history` → `StatusHistoryChart`; `text` → `Markdown`;
   `logs` → `LogsTable`. Any other type (for example `heatmap`,
   `state-timeline`, `xychart`, `barchart`, `geomap`) becomes a `Markdown`
-  panel with the text `**Migration from Grafana not supported !**`, and its
-  queries are still migrated.
+  panel with the text `**Migration from Grafana not supported !**` that
+  keeps the title and description. Its queries are **not** migrated: the
+  placeholder has `queries: null` (seen on Perses v0.54.0, 2026-10-23, with
+  `POST /api/migrate` on `prometheus-overview`: the `heatmap` and
+  `state-timeline` panels). A finished panel needs its whole `queries` list
+  written from the Grafana targets; editing
+  `.spec.queries[0].spec.plugin.spec.query` creates a query without `kind`,
+  and the server answers `400` "kind cannot be empty".
 - **Layouts.** Top-level panels go to one `Grid` titled `Panel Group 1`. A
   Grafana row becomes its own `Grid` (title, `collapse.open: !collapsed`,
   `repeatVariable`) only with the panels stored inside it, which Grafana does

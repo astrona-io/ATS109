@@ -36,13 +36,19 @@ A Grafana panel type is translated only when a plugin the Perses server runs dec
 
 ## The three placeholders
 
-When nothing claims a panel, the migration keeps the panel's title and description, and makes it a `Markdown` panel with the text `**Migration from Grafana not supported !**`. Its queries are still translated, so the expression is not lost. Print the two placeholder panels with their queries:
+When nothing claims a panel, the migration keeps the panel's title and description, and makes it a `Markdown` panel with the text `**Migration from Grafana not supported !**`. It does not migrate the panel's queries: the placeholder has `queries: null`. Print the two placeholder panels with their queries:
 
 ```sh
-jq '.spec.panels | to_entries | map(select(.value.spec.plugin.kind == "Markdown" and (.value.spec.plugin.spec.text | test("not supported")))) | map({key, title: .value.spec.display.name, query: .value.spec.queries[0].spec.plugin.spec.query})' overview-migrated.json
+jq '.spec.panels | to_entries | map(select(.value.spec.plugin.kind == "Markdown" and (.value.spec.plugin.spec.text | test("not supported")))) | map({key, title: .value.spec.display.name, queries: .value.spec.queries})' overview-migrated.json
 ```
 
-Panels `5` and `6` are the placeholders, and each still holds its PromQL expression. There are two more kinds of placeholder. A query no plugin claims becomes a `PrometheusTimeSeriesQuery` whose query is `migration_from_grafana_not_supported`. A variable no plugin claims becomes a `StaticListVariable` with the four values `grafana`, `migration`, `not` and `supported`. One `jq` command finds all three kinds in any migrated file:
+Panels `5` and `6` are the placeholders, and both show `queries: null`. The PromQL expression now exists only in the Grafana dashboard. The key of a top-level panel is its position in Grafana's `panels` list, so you can read the same two panels in the Grafana file:
+
+```sh
+jq -c '.panels[5,6] | {title, type, expr: [.targets[].expr]}' prometheus-overview.json
+```
+
+`Request duration` runs `sum by (le) (rate(prometheus_http_request_duration_seconds_bucket{job="$job"}[$interval]))`, and `Target state` runs `up{job="$job"}`. Copy these expressions before you replace the placeholders. There are two more kinds of placeholder. A query no plugin claims becomes a `PrometheusTimeSeriesQuery` whose query is `migration_from_grafana_not_supported`. A variable no plugin claims becomes a `StaticListVariable` with the four values `grafana`, `migration`, `not` and `supported`. One `jq` command finds all three kinds in any migrated file:
 
 ```sh
 jq '[.. | strings | select(test("Migration from Grafana not supported|migration_from_grafana_not_supported"))] | length' overview-migrated.json
@@ -94,4 +100,4 @@ You can now predict what each panel, query and variable becomes, and find every 
 > - **Counting only panels.** Placeholders also hide in queries and variables. Search the whole file for all three.
 > - **Missing the datasource names.** The migration copies the Grafana uid into every query. A dashboard full of `prom-main` opens without an error and shows nothing.
 > - **Expecting ad hoc filters to work.** Perses has no ad hoc filter, so an `adhoc` variable always becomes a placeholder.
-> - **Thinking the expression is lost.** A placeholder panel still carries its queries. Read them before you replace the panel.
+> - **Looking for the expression in the placeholder.** A placeholder panel has no queries. Read the expression from the Grafana panel at the same position.

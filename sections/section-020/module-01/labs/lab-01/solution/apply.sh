@@ -67,12 +67,21 @@ migrate_uid() {
     | perses_send POST /api/migrate
 }
 
+# A placeholder panel arrives with `queries: null` (seen on Perses v0.54.0), so
+# each replaced panel gets its whole query list, written from the Grafana
+# panel's targets. Without a datasource, a query uses the project default.
 migrate_uid prometheus-overview | tester jq -c '
   .metadata.project = "legacy"
   | .spec.panels["5"].spec.plugin = {"kind": "TimeSeriesChart", "spec": {"yAxis": {"format": {"unit": "seconds"}}}}
-  | .spec.panels["5"].spec.queries[0].spec.plugin.spec.query = "histogram_quantile(0.9, sum by (le) (rate(prometheus_http_request_duration_seconds_bucket{job=\"$job\"}[$interval])))"
-  | .spec.panels["5"].spec.queries[0].spec.plugin.spec.seriesNameFormat = "p90"
+  | .spec.panels["5"].spec.queries = [
+      {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {
+        "query": "histogram_quantile(0.9, sum by (le) (rate(prometheus_http_request_duration_seconds_bucket{job=\"$job\"}[$interval])))",
+        "seriesNameFormat": "p90"}}}}]
   | .spec.panels["6"].spec.plugin = {"kind": "StatusHistoryChart", "spec": {}}
+  | .spec.panels["6"].spec.queries = [
+      {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {
+        "query": "up{job=\"$job\"}",
+        "seriesNameFormat": "{{instance}}"}}}}]
   | .spec.variables |= map(select(.spec.name != "filter"))
   | .spec.duration = "3h" | .spec.refreshInterval = "1m"' \
   | put_dashboard legacy prometheus-overview
@@ -80,5 +89,8 @@ migrate_uid prometheus-overview | tester jq -c '
 migrate_uid prometheus-storage | tester jq -c '
   .metadata.project = "legacy"
   | .spec.panels["4"].spec.plugin = {"kind": "TimeSeriesChart", "spec": {"legend": {"position": "bottom"}}}
+  | .spec.panels["4"].spec.queries = [
+      {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {"query": "prometheus_tsdb_head_series"}}}},
+      {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {"query": "prometheus_tsdb_head_chunks"}}}}]
   | .spec.duration = "24h"' \
   | put_dashboard legacy prometheus-storage

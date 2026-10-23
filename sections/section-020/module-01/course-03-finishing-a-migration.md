@@ -36,15 +36,24 @@ jq '{panels: [.spec.panels | to_entries[] | select(.value.spec.plugin.kind == "M
      variables: [.spec.variables[] | select(.spec.plugin.spec.values? == ["grafana","migration","not","supported"]) | .spec.name]}' storage-migrated.json
 ```
 
-One panel is a placeholder: key `4`, `Series against chunks`, a Grafana `xychart` that plotted one metric against another, with two queries. No query and no variable is a placeholder here; the `text` panel `About` became a real `Markdown` panel with its content, which is not a placeholder.
+One panel is a placeholder: key `4`, `Series against chunks`, a Grafana `xychart` that plotted one metric against another. Its `queries` list is empty, because the migration does not migrate the queries of a panel it cannot translate. No query and no variable is a placeholder here; the `text` panel `About` became a real `Markdown` panel with its content, which is not a placeholder.
 
-You cannot get an X-Y chart in Perses v0.54.0, so choose the closest panel that shows the same data. A `TimeSeriesChart` with both queries draws both metrics over time. Replace only the plugin, and keep the title and the queries:
+The two expressions are still in the Grafana file. The panel key `4` is the panel's position in Grafana's `panels` list, so read that panel:
 
 ```sh
-jq '.spec.panels["4"].spec.plugin = {"kind": "TimeSeriesChart", "spec": {"legend": {"position": "bottom"}}}' storage-migrated.json > storage-finished.json
+jq -c '.panels[4] | {title, type, expr: [.targets[].expr]}' prometheus-storage.json
 ```
 
-The same pattern works for every placeholder panel: decide on a Perses plugin, set `plugin`, and keep `display` and `queries`. For a placeholder variable, either write the Perses variable by hand or remove it, together with its use in the queries, when Perses has no equivalent.
+The Grafana panel runs `prometheus_tsdb_head_series` and `prometheus_tsdb_head_chunks`. You cannot get an X-Y chart in Perses v0.54.0, so choose the closest panel that shows the same data. A `TimeSeriesChart` with both queries draws both metrics over time. Set the plugin and the whole `queries` list, and keep the title. Each query leaves out `datasource`, so it uses the default datasource of the project:
+
+```sh
+jq '.spec.panels["4"].spec.plugin = {"kind": "TimeSeriesChart", "spec": {"legend": {"position": "bottom"}}}
+    | .spec.panels["4"].spec.queries = [
+        {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {"query": "prometheus_tsdb_head_series"}}}},
+        {"kind": "TimeSeriesQuery", "spec": {"plugin": {"kind": "PrometheusTimeSeriesQuery", "spec": {"query": "prometheus_tsdb_head_chunks"}}}}]' storage-migrated.json > storage-finished.json
+```
+
+The same pattern works for every placeholder panel: decide on a Perses plugin, set `plugin`, write `queries` from the Grafana panel's targets, and keep `display`. For a placeholder variable, either write the Perses variable by hand or remove it, together with its use in the queries, when Perses has no equivalent.
 
 ## Restore what the migration dropped
 
@@ -71,7 +80,8 @@ You can now finish a migration: datasource names fixed, placeholders replaced wi
 ## Common pitfalls
 
 > [!WARNING]
-> - **Deleting a placeholder panel.** It hides the problem and loses the queries. Replace the plugin and keep the panel.
+> - **Deleting a placeholder panel.** It hides the problem and removes the panel's title and its place in the layout. Replace the plugin and keep the panel.
+> - **Editing a query the placeholder does not have.** A placeholder panel has no queries, so `.spec.queries[0].spec.plugin.spec.query = ...` creates a query without `kind`, and the server refuses it. Set the whole `queries` list.
 > - **Creating a datasource named after the Grafana uid.** It works today and ties every dashboard to an old name. Rename the references or use the default datasource.
 > - **Forgetting `--project`.** Without it, `metadata.project` is empty, and `percli apply` needs the project from `percli project` or `--project`.
 > - **Taking `kbytes` and other units for granted.** A unit outside the shared mapping disappears, and the panel shows raw numbers.

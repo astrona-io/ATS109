@@ -11,7 +11,7 @@ The Prometheus team is leaving Grafana. Their two dashboards, `Prometheus Overvi
 ## Your task
 
 1. Migrate both Grafana dashboards with `percli migrate --online` against the running Perses server.
-2. Replace every placeholder the migration wrote: placeholder panels with a Perses panel plugin that shows the same queries, placeholder variables with a working Perses variable or by removing them when Perses has no equivalent.
+2. Replace every placeholder the migration wrote: placeholder panels with a Perses panel plugin that runs the queries of the Grafana panel, placeholder variables with a working Perses variable or by removing them when Perses has no equivalent.
 3. Make every query use the datasource `prometheus`, by name or as the project default.
 4. Apply both dashboards to the project `legacy`, keeping their names `prometheus-overview` and `prometheus-storage`.
 
