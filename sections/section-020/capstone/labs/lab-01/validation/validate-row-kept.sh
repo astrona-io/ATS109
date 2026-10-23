@@ -66,7 +66,7 @@ RESULT="$(printf '%s' "$DASHBOARD" | tester jq -r '
   . as $d
   | [.spec.layouts[] | select(.spec.display.title == "Details")][0] as $g
   | if $g == null then "no Grid titled Details"
-    elif ($g.spec.display.collapse.open // true) then "the group Details is open"
+    elif ($g.spec.display.collapse.open != false) then "the group Details is open"
     else ([$g.spec.items[].content["$ref"] | sub("^#/spec/panels/"; "") | $d.spec.panels[.].spec.display.name // "missing"] | sort | join(","))
     end')"
 if [ "$RESULT" != "Errors (5xx) per second,Goroutines" ]; then
