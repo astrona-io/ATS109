@@ -7,7 +7,6 @@ metadata:
   name: "ats-109-playground-010-01"
   docs:
     guide: "docs/overview.md"
-
 bootstrap:
   init:
     - name: "prepare"
@@ -19,6 +18,12 @@ bootstrap:
       description: "Prometheus and the tester pod (namespace observability)."
       type: "file"
       source: "manifests/lab-start.yaml"
-
 teardown:
   keepCluster: false
+runtime:
+  kind:
+    preloadImages:
+      - docker.io/persesdev/perses:v0.54.0
+      - grafana/grafana:12.4.13
+      - nicolaka/netshoot:v0.13
+      - prom/prometheus:v3.15.1

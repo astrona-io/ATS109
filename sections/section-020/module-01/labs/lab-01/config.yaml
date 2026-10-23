@@ -9,7 +9,6 @@ metadata:
     question: "question.md"
     examQuestion: "question.md"
     prerequisites: "prerequisites.md"
-
 bootstrap:
   init:
     - name: "install-perses"
@@ -20,7 +19,6 @@ bootstrap:
       description: "Creates the starting state the task works from"
       type: "file"
       source: "bootstrap/02-seed-state.sh"
-
 testing:
   init:
     - name: "wait-for-perses"
@@ -31,7 +29,6 @@ testing:
       description: "The remediation a correct learner performs; used by `astrona test`"
       type: "file"
       source: "solution/apply.sh"
-
 validation:
   scripts:
     - name: "validate-dashboards-migrated"
@@ -50,6 +47,12 @@ validation:
       description: "Confirms every Grafana panel has a Perses panel: none was deleted to hide a placeholder"
       type: "file"
       source: "validation/validate-panel-count.sh"
-
 teardown:
   keepCluster: false
+runtime:
+  kind:
+    preloadImages:
+      - docker.io/persesdev/perses:v0.54.0
+      - grafana/grafana:12.4.13
+      - nicolaka/netshoot:v0.13
+      - prom/prometheus:v3.15.1
