@@ -30,8 +30,6 @@ training:
     name: Perses
     code: PERSES
     provider: Astrona
-    domain: Open Specification & Grafana Migration
-    weight: 15
 
 modules:
 
