@@ -1,0 +1,219 @@
+# Final domain knowledge check across all three sections.
+schema_version: 1
+kind: question_bank
+id: ats109-final
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: domain
+  id: open-specification-grafana-migration
+  title: "Open Specification & Grafana Migration"
+questions:
+  - id: ats109-final-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Tell metadata.name from the display name"
+    source_readings:
+      - sections/section-010/module-01/course-01-what-the-open-specification-is.md
+    prompt: "Which field holds the identifier of a Perses dashboard that you use in percli and in the API?"
+    options:
+      - id: a
+        text: "spec.display.name"
+        explanation: "Not correct. It is the name shown on screen and works in neither percli nor the API."
+      - id: b
+        text: "metadata.name"
+        explanation: "Correct. It cannot contain spaces."
+      - id: c
+        text: "metadata.project"
+        explanation: "Not correct. It names the project, not the dashboard."
+      - id: d
+        text: "kind"
+        explanation: "Not correct. kind says what the resource is, here Dashboard."
+    correct_option: b
+    explanation: "Correct. It cannot contain spaces."
+
+  - id: ats109-final-q02
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Place a panel with a layout"
+    source_readings:
+      - sections/section-010/module-01/course-02-panels-queries-and-layouts.md
+    prompt: "How does a Grid layout item find the panel it draws?"
+    options:
+      - id: a
+        text: "By the order of the panels in the file."
+        explanation: "Not correct. Items point at panels by key, not by order."
+      - id: b
+        text: "By the panel title in spec.display.name."
+        explanation: "Not correct. The title is not used to find the panel."
+      - id: c
+        text: "A content with a $ref such as \"#/spec/panels/openFiles\"."
+        explanation: "Correct. The $ref is a path inside the same document, and the key is case-sensitive."
+      - id: d
+        text: "By the datasource name of the panel query."
+        explanation: "Not correct. Datasources are not used for placement."
+    correct_option: c
+    explanation: "Correct. The $ref is a path inside the same document, and the key is case-sensitive."
+
+  - id: ats109-final-q03
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Explain datasource lookup"
+    source_readings:
+      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+    prompt: "A query names a datasource. In which order does Perses look for it?"
+    options:
+      - id: a
+        text: "GlobalDatasource, then the project, then the dashboard."
+        explanation: "Not correct. The order is smallest scope first."
+      - id: b
+        text: "The project, then GlobalDatasource, then the dashboard."
+        explanation: "Not correct. The dashboard is checked first."
+      - id: c
+        text: "Only the project. Other scopes are ignored."
+        explanation: "Not correct. Three scopes are checked."
+      - id: d
+        text: "The dashboard, then the project, then GlobalDatasource."
+        explanation: "Correct. The smallest scope wins."
+    correct_option: d
+    explanation: "Correct. The smallest scope wins."
+
+  - id: ats109-final-q04
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain the --online flag"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "What does percli migrate --online do?"
+    options:
+      - id: a
+        text: "It translates on your machine with a local plugin folder."
+        explanation: "Not correct. That is the mode without --online."
+      - id: b
+        text: "It sends the Grafana JSON to POST /api/migrate on the Perses server, which returns the translated dashboard without storing it."
+        explanation: "Correct. Storing is a separate step."
+      - id: c
+        text: "It translates the dashboard and stores it in the project."
+        explanation: "Not correct. The server does not store the result."
+      - id: d
+        text: "It downloads the dashboard from Grafana by uid."
+        explanation: "Not correct. You pass the dashboard file yourself."
+    correct_option: b
+    explanation: "Correct. Storing is a separate step."
+
+  - id: ats109-final-q05
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Read migrated panel keys"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "The Grafana panels list has eight entries and the entry at index 7 is a collapsed row. Which key does the first panel inside that row get?"
+    options:
+      - id: a
+        text: "0"
+        explanation: "Not correct. 0 is the key of the first top-level panel."
+      - id: b
+        text: "row-7"
+        explanation: "Not correct. Keys are made from positions, not row names."
+      - id: c
+        text: "7_0"
+        explanation: "Correct. The key is the position of the row, then the position inside it."
+      - id: d
+        text: "The panel title."
+        explanation: "Not correct. Titles go in display.name."
+    correct_option: c
+    explanation: "Correct. The key is the position of the row, then the position inside it."
+
+  - id: ats109-final-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Predict how rows migrate"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "What does the migration do with an open Grafana row?"
+    options:
+      - id: a
+        text: "It puts the row's panels in Panel Group 1 with the other top-level panels and drops the row and its title."
+        explanation: "Correct. Only collapsed rows become their own group."
+      - id: b
+        text: "It makes a Grid layout with the row title that is open."
+        explanation: "Not correct. That happens to collapsed rows."
+      - id: c
+        text: "It makes a placeholder panel for the row."
+        explanation: "Not correct. Rows are not panels in Perses."
+      - id: d
+        text: "It refuses to migrate the dashboard."
+        explanation: "Not correct. The migration succeeds and loses the row."
+    correct_option: a
+    explanation: "Correct. Only collapsed rows become their own group."
+
+  - id: ats109-final-q07
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Define an instant query"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "What does an instant query return?"
+    options:
+      - id: a
+        text: "One value per series, evaluated at one point in time."
+        explanation: "Correct. That makes the comparison fair."
+      - id: b
+        text: "All values of the last hour."
+        explanation: "Not correct. That is a range query."
+      - id: c
+        text: "Only the first series."
+        explanation: "Not correct. Every series is returned."
+      - id: d
+        text: "The panel's configuration."
+        explanation: "Not correct. It returns data."
+    correct_option: a
+    explanation: "Correct. That makes the comparison fair."
+
+  - id: ats109-final-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Use the Perses datasource proxy"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "Which path runs a Prometheus instant query through the Perses datasource proxy?"
+    options:
+      - id: a
+        text: "/api/v1/projects/parity/datasources/prometheus/query"
+        explanation: "Not correct. That path reads the datasource resource."
+      - id: b
+        text: "/api/migrate/parity/prometheus"
+        explanation: "Not correct. The migrate endpoint does not run queries."
+      - id: c
+        text: "/api/ds/query"
+        explanation: "Not correct. That is the Grafana query API."
+      - id: d
+        text: "/proxy/projects/parity/datasources/prometheus/api/v1/query"
+        explanation: "Correct. The proxy path is followed by the Prometheus API path."
+    correct_option: d
+    explanation: "Correct. The proxy path is followed by the Prometheus API path."
+
+  - id: ats109-final-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Check thresholds"
+    source_readings:
+      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+    prompt: "A stat uses percent-decimal and Grafana turns red at 0.05. Which threshold value must the Perses step have?"
+    options:
+      - id: a
+        text: "5, because the stat prints a percentage."
+        explanation: "Not correct. Thresholds do not use the printed value."
+      - id: b
+        text: "50, because the unit is a percentage."
+        explanation: "Not correct. The raw value is a fraction."
+      - id: c
+        text: "0.05, because thresholds compare the raw value."
+        explanation: "Correct. The unit does not change the scale."
+      - id: d
+        text: "null, because the migration clears thresholds."
+        explanation: "Not correct. The migration converts the steps."
+    correct_option: c
+    explanation: "Correct. The unit does not change the scale."

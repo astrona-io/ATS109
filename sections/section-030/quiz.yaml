@@ -1,0 +1,245 @@
+# Knowledge check for section 030. Listed in astrona.yaml as a `type: quiz` entry after the capstone lab.
+schema_version: 1
+kind: question_bank
+id: ats109-030
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: section
+  id: section-030
+  title: "Checking Query Parity"
+placement:
+  position: after
+  reading: sections/section-030/capstone/labs/lab-01/question.md
+questions:
+  - id: ats109-030-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain why built-in variables must be fixed"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "Why replace $__rate_interval with a fixed window such as 5m before comparing two tools?"
+    options:
+      - id: a
+        text: "Neither API stores built-in variables."
+        explanation: "Not correct. The reason is how the value is computed, not storage."
+      - id: b
+        text: "Prometheus refuses rate() with a variable."
+        explanation: "Not correct. The variable simply is not known to the API."
+      - id: c
+        text: "Each tool computes it from the width of the chart."
+        explanation: "Correct. A fixed window gives both tools the same expression."
+      - id: d
+        text: "A fixed window makes queries run faster."
+        explanation: "Not correct. Speed is not the reason."
+    correct_option: c
+    explanation: "Correct. A fixed window gives both tools the same expression."
+
+  - id: ats109-030-q02
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Define an instant query"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "What does an instant query return?"
+    options:
+      - id: a
+        text: "One value per series, evaluated at one point in time."
+        explanation: "Correct. That makes the comparison fair."
+      - id: b
+        text: "All values of the last hour."
+        explanation: "Not correct. That is a range query."
+      - id: c
+        text: "Only the first series."
+        explanation: "Not correct. Every series is returned."
+      - id: d
+        text: "The panel's configuration."
+        explanation: "Not correct. It returns data."
+    correct_option: a
+    explanation: "Correct. That makes the comparison fair."
+
+  - id: ats109-030-q03
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Avoid unit mistakes in time"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "Which time unit does Grafana's POST /api/ds/query use for from and to, compared with Prometheus' time parameter?"
+    options:
+      - id: a
+        text: "Both use Unix seconds."
+        explanation: "Not correct. Grafana takes milliseconds."
+      - id: b
+        text: "Grafana uses milliseconds and Prometheus uses Unix seconds."
+        explanation: "Correct. The helper adds three zeros to the Unix time."
+      - id: c
+        text: "Both use milliseconds."
+        explanation: "Not correct. Prometheus takes seconds."
+      - id: d
+        text: "Grafana uses seconds and Prometheus uses milliseconds."
+        explanation: "Not correct. It is the other way round."
+    correct_option: b
+    explanation: "Correct. The helper adds three zeros to the Unix time."
+
+  - id: ats109-030-q04
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Use the Perses datasource proxy"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "Which path runs a Prometheus instant query through the Perses datasource proxy?"
+    options:
+      - id: a
+        text: "/api/v1/projects/parity/datasources/prometheus/query"
+        explanation: "Not correct. That path reads the datasource resource."
+      - id: b
+        text: "/api/migrate/parity/prometheus"
+        explanation: "Not correct. The migrate endpoint does not run queries."
+      - id: c
+        text: "/api/ds/query"
+        explanation: "Not correct. That is the Grafana query API."
+      - id: d
+        text: "/proxy/projects/parity/datasources/prometheus/api/v1/query"
+        explanation: "Correct. The proxy path is followed by the Prometheus API path."
+    correct_option: d
+    explanation: "Correct. The proxy path is followed by the Prometheus API path."
+
+  - id: ats109-030-q05
+    type: single_choice
+    difficulty: advanced
+    learning_objective: "Compare expressions by data"
+    source_readings:
+      - sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
+    prompt: "At a fixed time, which comparison returns the same series as sum by (handler) (rate(prometheus_http_requests_total{handler=~\".*\"}[5m]))?"
+    options:
+      - id: a
+        text: "The same expression with a [1m] window."
+        explanation: "Not correct. A one-minute rate differs from a five-minute rate."
+      - id: b
+        text: "The same expression without the matcher handler=~\".*\"."
+        explanation: "Correct. The text differs, the data does not."
+      - id: c
+        text: "The same expression with sum by (job)."
+        explanation: "Not correct. Different labels give different series."
+      - id: d
+        text: "The same expression run ten seconds later."
+        explanation: "Not correct. The values change every scrape."
+    correct_option: b
+    explanation: "Correct. The text differs, the data does not."
+
+  - id: ats109-030-q06
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Map Grafana units to Perses units"
+    source_readings:
+      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+    prompt: "A query returns 0.02 and Grafana shows it as 2 % with the unit percentunit. Which Perses unit gives the same result?"
+    options:
+      - id: a
+        text: "percent"
+        explanation: "Not correct. It would print 0.02 %."
+      - id: b
+        text: "decimal"
+        explanation: "Not correct. It would print 0.02."
+      - id: c
+        text: "requests/sec"
+        explanation: "Not correct. That is the match for reqps."
+      - id: d
+        text: "percent-decimal"
+        explanation: "Correct. It prints a fraction as a percentage."
+    correct_option: d
+    explanation: "Correct. It prints a fraction as a percentage."
+
+  - id: ats109-030-q07
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Map Grafana reducers to Perses calculations"
+    source_readings:
+      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+    prompt: "Which Perses calculation matches the Grafana reducer lastNotNull?"
+    options:
+      - id: a
+        text: "last-number"
+        explanation: "Correct. It skips empty points at the end of a series."
+      - id: b
+        text: "last"
+        explanation: "Not correct. last takes the final point even when it is empty."
+      - id: c
+        text: "first-number"
+        explanation: "Not correct. That matches firstNotNull."
+      - id: d
+        text: "mean"
+        explanation: "Not correct. That matches mean and avg."
+    correct_option: a
+    explanation: "Correct. It skips empty points at the end of a series."
+
+  - id: ats109-030-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Check thresholds"
+    source_readings:
+      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+    prompt: "A stat uses percent-decimal and Grafana turns red at 0.05. Which threshold value must the Perses step have?"
+    options:
+      - id: a
+        text: "5, because the stat prints a percentage."
+        explanation: "Not correct. Thresholds do not use the printed value."
+      - id: b
+        text: "50, because the unit is a percentage."
+        explanation: "Not correct. The raw value is a fraction."
+      - id: c
+        text: "0.05, because thresholds compare the raw value."
+        explanation: "Correct. The unit does not change the scale."
+      - id: d
+        text: "null, because the migration clears thresholds."
+        explanation: "Not correct. The migration converts the steps."
+    correct_option: c
+    explanation: "Correct. The unit does not change the scale."
+
+  - id: ats109-030-q09
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Check the dashboard time settings"
+    source_readings:
+      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+    prompt: "Which time settings does a migrated dashboard have until you change them?"
+    options:
+      - id: a
+        text: "The time range and refresh of the Grafana dashboard."
+        explanation: "Not correct. They are not migrated."
+      - id: b
+        text: "duration 24h and refreshInterval 1m."
+        explanation: "Not correct. Those values are not defaults of the migration."
+      - id: c
+        text: "No duration, so the dashboard shows all data."
+        explanation: "Not correct. The duration is always set."
+      - id: d
+        text: "duration 1h and no refresh interval."
+        explanation: "Correct. People may think history is gone."
+    correct_option: d
+    explanation: "Correct. People may think history is gone."
+
+  - id: ats109-030-q10
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Check legends"
+    source_readings:
+      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+    prompt: "A Perses legend loses its label and reads p90 for every line. What is wrong?"
+    options:
+      - id: a
+        text: "Every series gets the same name, so the chart cannot be read, although the data is right."
+        explanation: "Correct. A format such as {{handler}} p90 keeps the label."
+      - id: b
+        text: "The query returns the wrong data."
+        explanation: "Not correct. Legend text does not change the data."
+      - id: c
+        text: "The unit is wrong."
+        explanation: "Not correct. Units format values, not names."
+      - id: d
+        text: "The datasource is missing."
+        explanation: "Not correct. A missing datasource gives no series at all."
+    correct_option: a
+    explanation: "Correct. A format such as {{handler}} p90 keeps the label."

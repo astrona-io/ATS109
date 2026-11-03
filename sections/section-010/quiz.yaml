@@ -1,0 +1,245 @@
+# Knowledge check for section 010. Listed in astrona.yaml as a `type: quiz` entry after the capstone lab.
+schema_version: 1
+kind: question_bank
+id: ats109-010
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: section
+  id: section-010
+  title: "The Perses Open Specification"
+placement:
+  position: after
+  reading: sections/section-010/capstone/labs/lab-01/question.md
+questions:
+  - id: ats109-010-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain what makes a tool compatible with Perses"
+    source_readings:
+      - sections/section-010/module-01/course-01-what-the-open-specification-is.md
+    prompt: "When does the Perses project call a tool compatible with the open specification?"
+    options:
+      - id: a
+        text: "When percli accepts the dashboards the tool produces."
+        explanation: "Correct. That is the compatibility test the project gives."
+      - id: b
+        text: "When the tool runs only inside the Perses server."
+        explanation: "Not correct. A compatible tool can run anywhere."
+      - id: c
+        text: "When the tool stores its dashboards in the Perses database."
+        explanation: "Not correct. Storage is not the test."
+      - id: d
+        text: "When the tool uses the Grafana dashboard JSON model."
+        explanation: "Not correct. Grafana has its own model."
+    correct_option: a
+    explanation: "Correct. That is the compatibility test the project gives."
+
+  - id: ats109-010-q02
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Tell metadata.name from the display name"
+    source_readings:
+      - sections/section-010/module-01/course-01-what-the-open-specification-is.md
+    prompt: "Which field holds the identifier of a Perses dashboard that you use in percli and in the API?"
+    options:
+      - id: a
+        text: "spec.display.name"
+        explanation: "Not correct. It is the name shown on screen and works in neither percli nor the API."
+      - id: b
+        text: "metadata.name"
+        explanation: "Correct. It cannot contain spaces."
+      - id: c
+        text: "metadata.project"
+        explanation: "Not correct. It names the project, not the dashboard."
+      - id: d
+        text: "kind"
+        explanation: "Not correct. kind says what the resource is, here Dashboard."
+    correct_option: b
+    explanation: "Correct. It cannot contain spaces."
+
+  - id: ats109-010-q03
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Name the dashboard spec fields"
+    source_readings:
+      - sections/section-010/module-01/course-01-what-the-open-specification-is.md
+    prompt: "Which field of a dashboard spec sets the time range the dashboard opens on, for example 1h?"
+    options:
+      - id: a
+        text: "refreshInterval"
+        explanation: "Not correct. It sets how often the data reloads."
+      - id: b
+        text: "layouts"
+        explanation: "Not correct. Layouts place panels."
+      - id: c
+        text: "duration"
+        explanation: "Correct. It is the default time range."
+      - id: d
+        text: "display"
+        explanation: "Not correct. It holds the name and description shown in the web interface."
+    correct_option: c
+    explanation: "Correct. It is the default time range."
+
+  - id: ats109-010-q04
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Describe the panels field"
+    source_readings:
+      - sections/section-010/module-01/course-02-panels-queries-and-layouts.md
+    prompt: "What is the type of the panels field in a dashboard spec?"
+    options:
+      - id: a
+        text: "A YAML list of panels."
+        explanation: "Not correct. A list such as - kind: Panel is not valid there."
+      - id: b
+        text: "A single panel object."
+        explanation: "Not correct. A dashboard can have many panels."
+      - id: c
+        text: "A string that points at a panel file."
+        explanation: "Not correct. Panels are defined inline in the spec."
+      - id: d
+        text: "A map from a panel key to a panel."
+        explanation: "Correct. The key is a name you choose and is unique in the dashboard."
+    correct_option: d
+    explanation: "Correct. The key is a name you choose and is unique in the dashboard."
+
+  - id: ats109-010-q05
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Place a panel with a layout"
+    source_readings:
+      - sections/section-010/module-01/course-02-panels-queries-and-layouts.md
+    prompt: "How does a Grid layout item find the panel it draws?"
+    options:
+      - id: a
+        text: "By the order of the panels in the file."
+        explanation: "Not correct. Items point at panels by key, not by order."
+      - id: b
+        text: "By the panel title in spec.display.name."
+        explanation: "Not correct. The title is not used to find the panel."
+      - id: c
+        text: "A content with a $ref such as \"#/spec/panels/openFiles\"."
+        explanation: "Correct. The $ref is a path inside the same document, and the key is case-sensitive."
+      - id: d
+        text: "By the datasource name of the panel query."
+        explanation: "Not correct. Datasources are not used for placement."
+    correct_option: c
+    explanation: "Correct. The $ref is a path inside the same document, and the key is case-sensitive."
+
+  - id: ats109-010-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Predict what happens to an unplaced panel"
+    source_readings:
+      - sections/section-010/module-01/course-02-panels-queries-and-layouts.md
+    prompt: "A panel exists in spec.panels but no layout item points at it. What happens?"
+    options:
+      - id: a
+        text: "The server stores the panel but never draws it."
+        explanation: "Correct. A panel must be placed by a layout item to appear."
+      - id: b
+        text: "The server refuses the dashboard."
+        explanation: "Not correct. The dashboard is stored without an error."
+      - id: c
+        text: "Perses adds an item for it at the bottom."
+        explanation: "Not correct. Perses does not place panels for you."
+      - id: d
+        text: "The server deletes the panel when it stores the dashboard."
+        explanation: "Not correct. The panel is kept."
+    correct_option: a
+    explanation: "Correct. A panel must be placed by a layout item to appear."
+
+  - id: ats109-010-q07
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Map Grafana grid positions to Perses"
+    source_readings:
+      - sections/section-010/module-01/course-02-panels-queries-and-layouts.md
+    prompt: "How does a Grafana gridPos with w and h carry over to a Perses Grid item?"
+    options:
+      - id: a
+        text: "w and h must be halved, because Perses uses a 12 unit grid."
+        explanation: "Not correct. The Perses grid is also 24 units wide."
+      - id: b
+        text: "They go into the panel plugin spec as size."
+        explanation: "Not correct. Position and size belong to the layout, not the panel."
+      - id: c
+        text: "They are dropped, and Perses sizes each panel itself."
+        explanation: "Not correct. Each item keeps its own width and height."
+      - id: d
+        text: "w becomes width and h becomes height, because both grids are 24 units wide."
+        explanation: "Correct. The numbers carry over."
+    correct_option: d
+    explanation: "Correct. The numbers carry over."
+
+  - id: ats109-010-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Configure a list variable"
+    source_readings:
+      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+    prompt: "A ListVariable has allowAllValue set to true and its query uses =~\"$code\". What does customAllValue do?"
+    options:
+      - id: a
+        text: "It sets the value chosen when the dashboard opens."
+        explanation: "Not correct. That is defaultValue."
+      - id: b
+        text: "It sets the value used when All is chosen, for example .* for a regular expression match."
+        explanation: "Correct. Without it, the All choice has no usable value in a regular expression."
+      - id: c
+        text: "It lets the reader choose more than one value."
+        explanation: "Not correct. That is allowMultiple."
+      - id: d
+        text: "It sorts the values alphabetically."
+        explanation: "Not correct. That is sort."
+    correct_option: b
+    explanation: "Correct. Without it, the All choice has no usable value in a regular expression."
+
+  - id: ats109-010-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Explain datasource lookup"
+    source_readings:
+      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+    prompt: "A query names a datasource. In which order does Perses look for it?"
+    options:
+      - id: a
+        text: "GlobalDatasource, then the project, then the dashboard."
+        explanation: "Not correct. The order is smallest scope first."
+      - id: b
+        text: "The project, then GlobalDatasource, then the dashboard."
+        explanation: "Not correct. The dashboard is checked first."
+      - id: c
+        text: "Only the project. Other scopes are ignored."
+        explanation: "Not correct. Three scopes are checked."
+      - id: d
+        text: "The dashboard, then the project, then GlobalDatasource."
+        explanation: "Correct. The smallest scope wins."
+    correct_option: d
+    explanation: "Correct. The smallest scope wins."
+
+  - id: ats109-010-q10
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Validate a dashboard against plugin schemas"
+    source_readings:
+      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+    prompt: "What does percli lint -f file.yaml --online do that lint without --online does not?"
+    options:
+      - id: a
+        text: "It stores the dashboard in the project."
+        explanation: "Not correct. Lint never stores anything."
+      - id: b
+        text: "It sends the file to the server, which checks it against the schemas of the plugins it runs."
+        explanation: "Correct. This is how a value such as calculation: average is refused."
+      - id: c
+        text: "It converts a Grafana dashboard to Perses."
+        explanation: "Not correct. That is percli migrate."
+      - id: d
+        text: "It restarts the Perses server."
+        explanation: "Not correct. Lint does not touch the server process."
+    correct_option: b
+    explanation: "Correct. This is how a value such as calculation: average is refused."

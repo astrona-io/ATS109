@@ -1,0 +1,245 @@
+# Knowledge check for section 020. Listed in astrona.yaml as a `type: quiz` entry after the capstone lab.
+schema_version: 1
+kind: question_bank
+id: ats109-020
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: section
+  id: section-020
+  title: "Migrating Grafana Dashboards"
+placement:
+  position: after
+  reading: sections/section-020/capstone/labs/lab-01/question.md
+questions:
+  - id: ats109-020-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain the --online flag"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "What does percli migrate --online do?"
+    options:
+      - id: a
+        text: "It translates on your machine with a local plugin folder."
+        explanation: "Not correct. That is the mode without --online."
+      - id: b
+        text: "It sends the Grafana JSON to POST /api/migrate on the Perses server, which returns the translated dashboard without storing it."
+        explanation: "Correct. Storing is a separate step."
+      - id: c
+        text: "It translates the dashboard and stores it in the project."
+        explanation: "Not correct. The server does not store the result."
+      - id: d
+        text: "It downloads the dashboard from Grafana by uid."
+        explanation: "Not correct. You pass the dashboard file yourself."
+    correct_option: b
+    explanation: "Correct. Storing is a separate step."
+
+  - id: ats109-020-q02
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Predict the migrated time range"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "A Grafana dashboard opens on the last three hours and refreshes every minute. What does the migrated dashboard have?"
+    options:
+      - id: a
+        text: "duration 3h and refreshInterval 1m."
+        explanation: "Not correct. Neither setting is migrated."
+      - id: b
+        text: "duration 3h and no refreshInterval."
+        explanation: "Not correct. The duration is always 1h."
+      - id: c
+        text: "No duration and refreshInterval 1m."
+        explanation: "Not correct. The duration is always set to 1h."
+      - id: d
+        text: "duration 1h and no refreshInterval."
+        explanation: "Correct. The migration does not carry over time or refresh."
+    correct_option: d
+    explanation: "Correct. The migration does not carry over time or refresh."
+
+  - id: ats109-020-q03
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Predict how rows migrate"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "What does the migration do with an open Grafana row?"
+    options:
+      - id: a
+        text: "It puts the row's panels in Panel Group 1 with the other top-level panels and drops the row and its title."
+        explanation: "Correct. Only collapsed rows become their own group."
+      - id: b
+        text: "It makes a Grid layout with the row title that is open."
+        explanation: "Not correct. That happens to collapsed rows."
+      - id: c
+        text: "It makes a placeholder panel for the row."
+        explanation: "Not correct. Rows are not panels in Perses."
+      - id: d
+        text: "It refuses to migrate the dashboard."
+        explanation: "Not correct. The migration succeeds and loses the row."
+    correct_option: a
+    explanation: "Correct. Only collapsed rows become their own group."
+
+  - id: ats109-020-q04
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Read migrated panel keys"
+    source_readings:
+      - sections/section-020/module-01/course-01-how-migration-works.md
+    prompt: "The Grafana panels list has eight entries and the entry at index 7 is a collapsed row. Which key does the first panel inside that row get?"
+    options:
+      - id: a
+        text: "0"
+        explanation: "Not correct. 0 is the key of the first top-level panel."
+      - id: b
+        text: "row-7"
+        explanation: "Not correct. Keys are made from positions, not row names."
+      - id: c
+        text: "7_0"
+        explanation: "Correct. The key is the position of the row, then the position inside it."
+      - id: d
+        text: "The panel title."
+        explanation: "Not correct. Titles go in display.name."
+    correct_option: c
+    explanation: "Correct. The key is the position of the row, then the position inside it."
+
+  - id: ats109-020-q05
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know which panel types migrate"
+    source_readings:
+      - sections/section-020/module-01/course-02-translating-panels-and-variables.md
+    prompt: "What does a Grafana heatmap panel become after percli migrate in Perses v0.54.0?"
+    options:
+      - id: a
+        text: "A Markdown placeholder panel."
+        explanation: "Correct. No plugin declares the heatmap type."
+      - id: b
+        text: "A TimeSeriesChart."
+        explanation: "Not correct. Only timeseries and graph map there."
+      - id: c
+        text: "A HeatmapChart."
+        explanation: "Not correct. No plugin claims the type, so there is no such result."
+      - id: d
+        text: "It is removed from the dashboard."
+        explanation: "Not correct. The panel stays as a placeholder."
+    correct_option: a
+    explanation: "Correct. No plugin declares the heatmap type."
+
+  - id: ats109-020-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Describe a placeholder panel"
+    source_readings:
+      - sections/section-020/module-01/course-02-translating-panels-and-variables.md
+    prompt: "What do the queries of a placeholder panel hold?"
+    options:
+      - id: a
+        text: "The original Grafana expressions."
+        explanation: "Not correct. They are not copied."
+      - id: b
+        text: "One query with migration_from_grafana_not_supported."
+        explanation: "Not correct. That is the placeholder for a query, not for a panel."
+      - id: c
+        text: "An empty list that the server fills in."
+        explanation: "Not correct. The value is null and nothing fills it."
+      - id: d
+        text: "null. The expressions exist only in the Grafana dashboard."
+        explanation: "Correct. The migration does not migrate queries of a panel it cannot translate."
+    correct_option: d
+    explanation: "Correct. The migration does not migrate queries of a panel it cannot translate."
+
+  - id: ats109-020-q07
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Predict how variables migrate"
+    source_readings:
+      - sections/section-020/module-01/course-02-translating-panels-and-variables.md
+    prompt: "What does a Grafana adhoc variable become?"
+    options:
+      - id: a
+        text: "A TextVariable."
+        explanation: "Not correct. That is for textbox and constant."
+      - id: b
+        text: "A StaticListVariable with the values grafana, migration, not and supported."
+        explanation: "Correct. Perses has no ad hoc filters, so no plugin claims it."
+      - id: c
+        text: "A PrometheusLabelNamesVariable."
+        explanation: "Not correct. That is for label_names()."
+      - id: d
+        text: "A DatasourceVariable."
+        explanation: "Not correct. That is for the datasource variable type."
+    correct_option: b
+    explanation: "Correct. Perses has no ad hoc filters, so no plugin claims it."
+
+  - id: ats109-020-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Explain the datasource fault after migration"
+    source_readings:
+      - sections/section-020/module-01/course-02-translating-panels-and-variables.md
+    prompt: "Why do the panels of a migrated dashboard stay empty when the project has no datasource called prom-main?"
+    options:
+      - id: a
+        text: "The migration drops every datasource from the queries."
+        explanation: "Not correct. Names are kept unless you use --use-default-datasource."
+      - id: b
+        text: "The migration changes every expression to a placeholder."
+        explanation: "Not correct. Expressions move over unchanged."
+      - id: c
+        text: "The migration copies the Grafana datasource uid into the Perses datasource name."
+        explanation: "Correct. The name must exist in the project or be removed."
+      - id: d
+        text: "The migration disables panels with a datasource."
+        explanation: "Not correct. Nothing is disabled."
+    correct_option: c
+    explanation: "Correct. The name must exist in the project or be removed."
+
+  - id: ats109-020-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Use the default datasource"
+    source_readings:
+      - sections/section-020/module-01/course-03-finishing-a-migration.md
+    prompt: "What does --use-default-datasource do in percli migrate?"
+    options:
+      - id: a
+        text: "It removes the datasource name from every query, so each uses the default datasource of its kind."
+        explanation: "Correct. In the project legacy that is the datasource prometheus."
+      - id: b
+        text: "It creates a default datasource in the project."
+        explanation: "Not correct. The datasource must already exist."
+      - id: c
+        text: "It writes the project name into metadata.project."
+        explanation: "Not correct. That is --project."
+      - id: d
+        text: "It replaces placeholder panels with Markdown."
+        explanation: "Not correct. Placeholders are always Markdown."
+    correct_option: a
+    explanation: "Correct. In the project legacy that is the datasource prometheus."
+
+  - id: ats109-020-q10
+    type: single_choice
+    difficulty: advanced
+    learning_objective: "Replace a placeholder correctly"
+    source_readings:
+      - sections/section-020/module-01/course-03-finishing-a-migration.md
+    prompt: "How should you fix a placeholder panel such as Series against chunks?"
+    options:
+      - id: a
+        text: "Delete the panel from the dashboard."
+        explanation: "Not correct. That removes the title and its place in the layout."
+      - id: b
+        text: "Set a new plugin and the whole queries list from the Grafana targets, and keep the title."
+        explanation: "Correct. Setting only queries[0] would create a query without kind."
+      - id: c
+        text: "Set queries[0].spec.plugin.spec.query on the existing panel."
+        explanation: "Not correct. The panel has no queries, so the server refuses the result."
+      - id: d
+        text: "Create a datasource with the Grafana uid."
+        explanation: "Not correct. That does not replace the panel."
+    correct_option: b
+    explanation: "Correct. Setting only queries[0] would create a query without kind."

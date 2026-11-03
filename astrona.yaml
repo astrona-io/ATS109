@@ -129,6 +129,10 @@ modules:
             url: https://perses.dev/perses/docs/api/datasource/
           - name: "Proxy"
             url: https://perses.dev/perses/docs/concepts/proxy/
+      - type: quiz
+        title: "Knowledge Check: The Perses Open Specification"
+        path: sections/section-010/quiz.yaml
+        pass_score: 70
 
   - id: module-020
     title: "Migrating Grafana Dashboards"
@@ -201,6 +205,10 @@ modules:
             url: https://perses.dev/perses/docs/migration/
           - name: "Perses CLI"
             url: https://perses.dev/perses/docs/cli/
+      - type: quiz
+        title: "Knowledge Check: Migrating Grafana Dashboards"
+        path: sections/section-020/quiz.yaml
+        pass_score: 70
 
   - id: module-030
     title: "Checking Query Parity"
@@ -271,3 +279,11 @@ modules:
             url: https://perses.dev/perses/docs/concepts/proxy/
           - name: "Migrate from Grafana"
             url: https://perses.dev/perses/docs/migration/
+      - type: quiz
+        title: "Knowledge Check: Checking Query Parity"
+        path: sections/section-030/quiz.yaml
+        pass_score: 70
+      - type: quiz
+        title: "Final Domain Quiz"
+        path: sections/final-domain-quiz.yaml
+        pass_score: 70
