@@ -13,7 +13,7 @@
 training:
   id: ATS109
   title: "Perses: Open Specification & Grafana Migration"
-  maturity: draft
+  maturity: alpha
   description: >
     Training material covering the Open Specification & Grafana Migration
     domain of the Perses training path: the Perses dashboard specification
