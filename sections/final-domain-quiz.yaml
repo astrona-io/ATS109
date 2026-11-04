@@ -62,7 +62,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Explain datasource lookup"
     source_readings:
-      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+      - sections/section-010/module-01/course-04-variables-datasources-and-plugin-schemas.md
     prompt: "A query names a datasource. In which order does Perses look for it?"
     options:
       - id: a
@@ -200,7 +200,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Check thresholds"
     source_readings:
-      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - sections/section-030/module-01/course-04-what-changes-the-picture.md
     prompt: "A stat uses percent-decimal and Grafana turns red at 0.05. Which threshold value must the Perses step have?"
     options:
       - id: a
@@ -217,3 +217,279 @@ questions:
         explanation: "Not correct. The migration converts the steps."
     correct_option: c
     explanation: "Correct. The unit does not change the scale."
+
+  - id: ats109-final-q10
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Set the unit of a time series chart"
+    source_readings:
+      - sections/section-010/module-02/course-01-time-series-chart-settings.md
+    prompt: "Where does a TimeSeriesChart panel set the unit of its values?"
+    options:
+      - id: a
+        text: "In spec.display.unit of the panel."
+        explanation: "Not correct. The display block holds only the name and description."
+      - id: b
+        text: "In the plugin settings under yAxis.format.unit."
+        explanation: "Correct. The y axis holds the format of the values it draws."
+      - id: c
+        text: "In the query, as a label."
+        explanation: "Not correct. A query returns data and does not format it."
+      - id: d
+        text: "In the layout item of the panel."
+        explanation: "Not correct. A layout item holds position and size only."
+    correct_option: b
+    explanation: "Correct. The y axis holds the format of the values it draws."
+
+  - id: ats109-final-q11
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Write thresholds in the unit of the panel"
+    source_readings:
+      - sections/section-010/module-02/course-04-units-thresholds-and-choosing-a-plugin.md
+    prompt: "A panel has the unit percent-decimal. Which threshold step value means five percent?"
+    options:
+      - id: a
+        text: "5"
+        explanation: "Not correct. With percent-decimal, 5 means five hundred percent."
+      - id: b
+        text: "50"
+        explanation: "Not correct. That is five thousand percent."
+      - id: c
+        text: "0.05"
+        explanation: "Correct. Threshold values use the unit of the panel, so 0.05 is five percent."
+      - id: d
+        text: "0.5"
+        explanation: "Not correct. That is fifty percent."
+    correct_option: c
+    explanation: "Correct. Threshold values use the unit of the panel, so 0.05 is five percent."
+
+  - id: ats109-final-q12
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Name the label values variable"
+    source_readings:
+      - sections/section-010/module-03/course-01-list-and-text-variables.md
+    prompt: "Which variable plugin lists the values of one label of a Prometheus series?"
+    options:
+      - id: a
+        text: "StaticListVariable"
+        explanation: "Not correct. It holds a fixed list."
+      - id: b
+        text: "TextVariable"
+        explanation: "Not correct. It holds one typed value."
+      - id: c
+        text: "DatasourceVariable"
+        explanation: "Not correct. It lists datasources."
+      - id: d
+        text: "PrometheusLabelValuesVariable"
+        explanation: "Correct. It reads label values from the datasource."
+    correct_option: d
+    explanation: "Correct. It reads label values from the datasource."
+
+  - id: ats109-final-q13
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Name the datasource scopes"
+    source_readings:
+      - sections/section-010/module-03/course-03-datasources-and-scopes.md
+    prompt: "In which scopes can a datasource that a query names exist?"
+    options:
+      - id: a
+        text: "In the dashboard, in the project or globally."
+        explanation: "Correct. Perses looks in these three scopes."
+      - id: b
+        text: "Only in the dashboard."
+        explanation: "Not correct. Project and global datasources count too."
+      - id: c
+        text: "Only in the Helm chart values."
+        explanation: "Not correct. Chart values do not define datasources for queries."
+      - id: d
+        text: "Only in the browser."
+        explanation: "Not correct. The server holds them."
+    correct_option: a
+    explanation: "Correct. Perses looks in these three scopes."
+
+  - id: ats109-final-q14
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain panel keys"
+    source_readings:
+      - sections/section-020/module-02/course-01-panel-keys-and-layout-items.md
+    prompt: "How does the migration name the key of a top-level panel?"
+    options:
+      - id: a
+        text: "By the panel title."
+        explanation: "Not correct. Titles are in the display name."
+      - id: b
+        text: "By its position in the Grafana panels list, counted from zero."
+        explanation: "Correct. The key carries no meaning of its own."
+      - id: c
+        text: "By a random identifier."
+        explanation: "Not correct. The key is the position."
+      - id: d
+        text: "By the Grafana panel id."
+        explanation: "Not correct. The position is used."
+    correct_option: b
+    explanation: "Correct. The key carries no meaning of its own."
+
+  - id: ats109-final-q15
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know the adhoc variable result"
+    source_readings:
+      - sections/section-020/module-02/course-03-variables-after-migration.md
+    prompt: "What does the migration make of a Grafana adhoc variable?"
+    options:
+      - id: a
+        text: "A TextVariable."
+        explanation: "Not correct. Text variables come from textbox and constant."
+      - id: b
+        text: "A DatasourceVariable."
+        explanation: "Not correct. That comes from a datasource variable."
+      - id: c
+        text: "A StaticListVariable with the values grafana, migration, not and supported."
+        explanation: "Correct. It has no Perses equivalent."
+      - id: d
+        text: "Nothing; it is dropped silently."
+        explanation: "Not correct. A placeholder is written."
+    correct_option: c
+    explanation: "Correct. It has no Perses equivalent."
+
+  - id: ats109-final-q16
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Use the input flag"
+    source_readings:
+      - sections/section-020/module-03/course-01-grafana-inputs-and-the-input-flag.md
+    prompt: "What does --input NAME=VALUE do in percli migrate?"
+    options:
+      - id: a
+        text: "It names the output file."
+        explanation: "Not correct. Use redirection or -o."
+      - id: b
+        text: "It sets the project."
+        explanation: "Not correct. Use --project."
+      - id: c
+        text: "It picks the plugin folder."
+        explanation: "Not correct. Use --plugin.path."
+      - id: d
+        text: "It replaces the Grafana input ${NAME} with VALUE."
+        explanation: "Correct. Grafana exports use inputs as placeholders."
+    correct_option: d
+    explanation: "Correct. Grafana exports use inputs as placeholders."
+
+  - id: ats109-final-q17
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know online and offline"
+    source_readings:
+      - sections/section-020/module-03/course-01-grafana-inputs-and-the-input-flag.md
+    prompt: "What does percli migrate --online do?"
+    options:
+      - id: a
+        text: "It sends the Grafana JSON to POST /api/migrate on the Perses server."
+        explanation: "Correct. The server uses the plugins it has loaded."
+      - id: b
+        text: "It opens Grafana in a browser."
+        explanation: "Not correct. It sends a request."
+      - id: c
+        text: "It needs --plugin.path too."
+        explanation: "Not correct. The two options exclude each other."
+      - id: d
+        text: "It deletes the Grafana file."
+        explanation: "Not correct. The file stays."
+    correct_option: a
+    explanation: "Correct. The server uses the plugins it has loaded."
+
+  - id: ats109-final-q18
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Map the percentunit"
+    source_readings:
+      - sections/section-030/module-02/course-01-units-and-number-formats.md
+    prompt: "Which Perses unit does the Grafana unit percentunit become?"
+    options:
+      - id: a
+        text: "percent"
+        explanation: "Not correct. Percent expects values up to 100."
+      - id: b
+        text: "percent-decimal"
+        explanation: "Correct. Both read a fraction of 1 as a percent."
+      - id: c
+        text: "decimal"
+        explanation: "Not correct. It shows a plain number."
+      - id: d
+        text: "none"
+        explanation: "Not correct. It is not a Perses unit."
+    correct_option: b
+    explanation: "Correct. Both read a fraction of 1 as a percent."
+
+  - id: ats109-final-q19
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know the base step"
+    source_readings:
+      - sections/section-030/module-02/course-03-thresholds-and-calculations.md
+    prompt: "What does a Grafana base threshold step with value null become in Perses?"
+    options:
+      - id: a
+        text: "It is dropped."
+        explanation: "Not correct. The step is kept."
+      - id: b
+        text: "A step with the value 100."
+        explanation: "Not correct. It is the lowest step."
+      - id: c
+        text: "A step with the value 0."
+        explanation: "Correct. The migration writes 0 for the base step."
+      - id: d
+        text: "An error."
+        explanation: "Not correct. The migration accepts it."
+    correct_option: c
+    explanation: "Correct. The migration writes 0 for the base step."
+
+  - id: ats109-final-q20
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Order the release checks"
+    source_readings:
+      - sections/section-030/module-03/course-01-what-to-check-before-a-release.md
+    prompt: "What is the order of the four release checks?"
+    options:
+      - id: a
+        text: "Parity, validity, placeholders, datasources."
+        explanation: "Not correct. Parity costs most and comes last."
+      - id: b
+        text: "Datasources, parity, validity, placeholders."
+        explanation: "Not correct. Validity comes first."
+      - id: c
+        text: "Placeholders, parity, datasources, validity."
+        explanation: "Not correct. The order runs cheap to costly."
+      - id: d
+        text: "Validity, placeholders, datasources, parity."
+        explanation: "Correct. From cheapest to most expensive."
+    correct_option: d
+    explanation: "Correct. From cheapest to most expensive."
+
+  - id: ats109-final-q21
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Match panels by title"
+    source_readings:
+      - sections/section-030/module-03/course-03-one-check-script.md
+    prompt: "How does the script match a Grafana panel to a Perses panel?"
+    options:
+      - id: a
+        text: "By title."
+        explanation: "Correct. The keys are positions that change."
+      - id: b
+        text: "By key."
+        explanation: "Not correct. Keys can differ."
+      - id: c
+        text: "By position."
+        explanation: "Not correct. Positions can differ."
+      - id: d
+        text: "By colour."
+        explanation: "Not correct. Colour is not an identity."
+    correct_option: a
+    explanation: "Correct. The keys are positions that change."

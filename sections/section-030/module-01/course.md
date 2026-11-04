@@ -4,7 +4,7 @@ The last step of a migration is the one most teams skip: proving that the new da
 
 This module turns "it looks the same" into a check. Keep one sentence in mind: **query parity means the same expression, with the same variable values, at the same moment, returns the same series and values; everything else a panel shows has to be checked separately.** You will run expressions through Grafana and through Perses, compare the results with `jq`, and then go through the panel settings that change the picture without changing the data.
 
-The module has two parts. **Running The Same Query In Both Tools** sends a Grafana panel's expression through Grafana's query API and the Perses panel's expression through the Perses datasource proxy, and compares them. **What Changes The Picture Besides The Query** covers legends, units, calculations, thresholds and time settings, and ends with a parity checklist; a graded lab follows it.
+The module has four parts. **Running The Same Query In Both Tools** sends a Grafana panel's expression through Grafana's query API and the Perses panel's expression through the Perses datasource proxy, and compares them. **Comparing Every Panel In A Loop** repeats the comparison for each panel of a dashboard. **Reading A Parity Failure** causes a fault on purpose and reads what the difference says. **What Changes The Picture Besides The Query** covers legends, units, calculations, thresholds and time settings, and ends with a parity checklist; a graded lab follows it.
 
 ## Learning objectives
 

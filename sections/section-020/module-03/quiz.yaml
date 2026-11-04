@@ -1,0 +1,245 @@
+# Knowledge check for module 020-03. Listed in astrona.yaml as a `type: quiz` entry after the module summary.
+schema_version: 1
+kind: question_bank
+id: ats109-020-03
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: module
+  id: section-020/module-03
+  title: "Migrate Every Dashboard In A Folder"
+placement:
+  position: after
+  reading: sections/section-020/module-03/course-05-summary.md
+questions:
+  - id: ats109-020-03-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Use the input flag"
+    source_readings:
+      - sections/section-020/module-03/course-01-grafana-inputs-and-the-input-flag.md
+    prompt: "What does --input NAME=VALUE do in percli migrate?"
+    options:
+      - id: a
+        text: "It replaces the Grafana input ${NAME} with VALUE."
+        explanation: "Correct. Grafana exports use inputs as placeholders."
+      - id: b
+        text: "It names the output file."
+        explanation: "Not correct. Use redirection or -o."
+      - id: c
+        text: "It sets the project."
+        explanation: "Not correct. Use --project."
+      - id: d
+        text: "It picks the plugin folder."
+        explanation: "Not correct. Use --plugin.path."
+    correct_option: a
+    explanation: "Correct. Grafana exports use inputs as placeholders."
+
+  - id: ats109-020-03-q02
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Use the default datasource flag"
+    source_readings:
+      - sections/section-020/module-03/course-02-projects-and-the-default-datasource.md
+    prompt: "What does --use-default-datasource do?"
+    options:
+      - id: a
+        text: "It creates a datasource."
+        explanation: "Not correct. It creates nothing."
+      - id: b
+        text: "It removes the datasource name from the queries, so the project default is used."
+        explanation: "Correct. The Grafana uid does not exist in Perses."
+      - id: c
+        text: "It renames the dashboard."
+        explanation: "Not correct. The name comes from the uid."
+      - id: d
+        text: "It converts panels."
+        explanation: "Not correct. Panel conversion is unchanged."
+    correct_option: b
+    explanation: "Correct. The Grafana uid does not exist in Perses."
+
+  - id: ats109-020-03-q03
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Use the project flag"
+    source_readings:
+      - sections/section-020/module-03/course-02-projects-and-the-default-datasource.md
+    prompt: "Which flag sets the project of the migrated dashboard?"
+    options:
+      - id: a
+        text: "--folder"
+        explanation: "Not correct. No such flag exists."
+      - id: b
+        text: "--input"
+        explanation: "Not correct. It replaces Grafana inputs."
+      - id: c
+        text: "--project"
+        explanation: "Correct. It writes metadata.project."
+      - id: d
+        text: "--format"
+        explanation: "Not correct. It sets the output kind."
+    correct_option: c
+    explanation: "Correct. It writes metadata.project."
+
+  - id: ats109-020-03-q04
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know the dashboard name"
+    source_readings:
+      - sections/section-020/module-03/course-02-projects-and-the-default-datasource.md
+    prompt: "Which Grafana field becomes metadata.name of the Perses dashboard?"
+    options:
+      - id: a
+        text: "title"
+        explanation: "Not correct. The title becomes the display name."
+      - id: b
+        text: "id"
+        explanation: "Not correct. The numeric id is not used."
+      - id: c
+        text: "version"
+        explanation: "Not correct. It is not used as a name."
+      - id: d
+        text: "uid"
+        explanation: "Correct. The uid is the stable identifier."
+    correct_option: d
+    explanation: "Correct. The uid is the stable identifier."
+
+  - id: ats109-020-03-q05
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Pick the custom resource format"
+    source_readings:
+      - sections/section-020/module-03/course-03-output-formats-and-custom-resources.md
+    prompt: "Which flag value makes percli migrate write a Kubernetes custom resource?"
+    options:
+      - id: a
+        text: "--format cr"
+        explanation: "Correct. The cr value is short for custom-resource."
+      - id: b
+        text: "-o cr"
+        explanation: "Not correct. The -o flag picks json or yaml."
+      - id: c
+        text: "--format helm"
+        explanation: "Not correct. No such format exists."
+      - id: d
+        text: "--project cr"
+        explanation: "Not correct. That sets the project."
+    correct_option: a
+    explanation: "Correct. The cr value is short for custom-resource."
+
+  - id: ats109-020-03-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know online and offline"
+    source_readings:
+      - sections/section-020/module-03/course-01-grafana-inputs-and-the-input-flag.md
+    prompt: "What does percli migrate --online do?"
+    options:
+      - id: a
+        text: "It opens Grafana in a browser."
+        explanation: "Not correct. It sends a request."
+      - id: b
+        text: "It sends the Grafana JSON to POST /api/migrate on the Perses server."
+        explanation: "Correct. The server uses the plugins it has loaded."
+      - id: c
+        text: "It needs --plugin.path too."
+        explanation: "Not correct. The two options exclude each other."
+      - id: d
+        text: "It deletes the Grafana file."
+        explanation: "Not correct. The file stays."
+    correct_option: b
+    explanation: "Correct. The server uses the plugins it has loaded."
+
+  - id: ats109-020-03-q07
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Find a folder's dashboards"
+    source_readings:
+      - sections/section-020/module-03/course-04-migrating-a-whole-folder.md
+    prompt: "How does a script find the dashboards of the Grafana folder Legacy?"
+    options:
+      - id: a
+        text: "With the Perses API."
+        explanation: "Not correct. Perses does not know Grafana folders."
+      - id: b
+        text: "With helm list."
+        explanation: "Not correct. Helm lists releases."
+      - id: c
+        text: "With the search API, keeping those whose folderTitle is Legacy."
+        explanation: "Correct. The search result names the folder of each dashboard."
+      - id: d
+        text: "With percli get folders."
+        explanation: "Not correct. No such command exists."
+    correct_option: c
+    explanation: "Correct. The search result names the folder of each dashboard."
+
+  - id: ats109-020-03-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know what the filter skips"
+    source_readings:
+      - sections/section-020/module-03/course-04-migrating-a-whole-folder.md
+    prompt: "A dashboard sits in the General folder. What does the folderTitle filter do with it?"
+    options:
+      - id: a
+        text: "Migrates it."
+        explanation: "Not correct. It does not match."
+      - id: b
+        text: "Fails the loop."
+        explanation: "Not correct. The filter just skips it."
+      - id: c
+        text: "Moves it to Legacy."
+        explanation: "Not correct. Grafana is not changed."
+      - id: d
+        text: "Skips it, because it has no folderTitle."
+        explanation: "Correct. Only dashboards in the folder match."
+    correct_option: d
+    explanation: "Correct. Only dashboards in the folder match."
+
+  - id: ats109-020-03-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Prove a folder migration"
+    source_readings:
+      - sections/section-020/module-03/course-04-migrating-a-whole-folder.md
+    prompt: "After the loop, how do you check that no panel was lost?"
+    options:
+      - id: a
+        text: "Compare the panel count of each Grafana dashboard with the Perses one."
+        explanation: "Correct. Counts show lost panels at once."
+      - id: b
+        text: "Check that percli printed no error."
+        explanation: "Not correct. A lost panel raises no error."
+      - id: c
+        text: "Open the Perses home page."
+        explanation: "Not correct. It proves nothing about panels."
+      - id: d
+        text: "Check the file size."
+        explanation: "Not correct. Size says nothing."
+    correct_option: a
+    explanation: "Correct. Counts show lost panels at once."
+
+  - id: ats109-020-03-q10
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know what a loop leaves"
+    source_readings:
+      - sections/section-020/module-03/course-04-migrating-a-whole-folder.md
+    prompt: "What does a migration loop leave for a person to finish?"
+    options:
+      - id: a
+        text: "The dashboard names."
+        explanation: "Not correct. The names are set."
+      - id: b
+        text: "The placeholder panels, queries and variables."
+        explanation: "Correct. The migration marks what it cannot translate."
+      - id: c
+        text: "The project."
+        explanation: "Not correct. The flag sets it."
+      - id: d
+        text: "The Prometheus version."
+        explanation: "Not correct. It is not touched."
+    correct_option: b
+    explanation: "Correct. The migration marks what it cannot translate."

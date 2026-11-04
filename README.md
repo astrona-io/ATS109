@@ -25,9 +25,9 @@ lives under `sections/`. Each section contains:
 
 | Section | Title | Modules | Labs | Topic |
 | --- | --- | --- | --- | --- |
-| [010](sections/section-010) | The Perses Open Specification | 1 | 1 + capstone | The dashboard specification |
-| [020](sections/section-020) | Migrating Grafana Dashboards | 1 | 1 + capstone | `percli migrate` and finishing a migration |
-| [030](sections/section-030) | Checking Query Parity | 1 | 1 + capstone | Proving a migrated dashboard shows the same data |
+| [010](sections/section-010) | The Perses Open Specification | 3 | 3 + capstone | The dashboard specification |
+| [020](sections/section-020) | Migrating Grafana Dashboards | 3 | 3 + capstone | `percli migrate` and finishing a migration |
+| [030](sections/section-030) | Checking Query Parity | 3 | 3 + capstone | Proving a migrated dashboard shows the same data |
 
 The order follows a real migration project. You cannot judge what a migration
 produced until you can read the Perses specification, so section 010 comes
@@ -40,9 +40,15 @@ Section 030 proves that the result shows the same data as Grafana did.
 
 | Module | Reader | Parts | Labs |
 | --- | --- | --- | --- |
-| 010-01 | [Read And Write The Perses Dashboard Specification](sections/section-010/module-01/course.md) | 3 | [lab-01](sections/section-010/module-01/labs/lab-01) |
-| 020-01 | [Migrate Grafana Dashboards With percli](sections/section-020/module-01/course.md) | 3 | [lab-01](sections/section-020/module-01/labs/lab-01) |
-| 030-01 | [Check That A Migrated Dashboard Shows The Same Data](sections/section-030/module-01/course.md) | 2 | [lab-01](sections/section-030/module-01/labs/lab-01) |
+| 010-01 | [Read And Write The Perses Dashboard Specification](sections/section-010/module-01/course.md) | 4 | [lab-01](sections/section-010/module-01/labs/lab-01) |
+| 010-02 | [Choose And Configure Panel Plugins](sections/section-010/module-02/course.md) | 4 | [lab-01](sections/section-010/module-02/labs/lab-01) |
+| 010-03 | [Work With Variables, Datasources And Validation](sections/section-010/module-03/course.md) | 4 | [lab-01](sections/section-010/module-03/labs/lab-01) |
+| 020-01 | [Migrate Grafana Dashboards With percli](sections/section-020/module-01/course.md) | 4 | [lab-01](sections/section-020/module-01/labs/lab-01) |
+| 020-02 | [Read And Reshape A Migrated Dashboard](sections/section-020/module-02/course.md) | 4 | [lab-01](sections/section-020/module-02/labs/lab-01) |
+| 020-03 | [Migrate With Inputs, Projects And Output Formats](sections/section-020/module-03/course.md) | 4 | [lab-01](sections/section-020/module-03/labs/lab-01) |
+| 030-01 | [Check That A Migrated Dashboard Shows The Same Data](sections/section-030/module-01/course.md) | 4 | [lab-01](sections/section-030/module-01/labs/lab-01) |
+| 030-02 | [Compare What The Reader Sees](sections/section-030/module-02/course.md) | 4 | [lab-01](sections/section-030/module-02/labs/lab-01) |
+| 030-03 | [Build A Release Check](sections/section-030/module-03/course.md) | 4 | [lab-01](sections/section-030/module-03/labs/lab-01) |
 
 ---
 

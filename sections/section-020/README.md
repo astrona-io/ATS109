@@ -18,7 +18,7 @@ This section runs that migration on real Grafana dashboards, reads what came out
 
 ## The learning path
 
-The module has a landing page, three short parts, a graded lab right after the part it tests, and a summary. The module also has its own playground, and the landing page starts it for you.
+Each module has a landing page, four short parts, a graded lab right after the part it tests, and a summary. Each module also has its own playground, and the landing page starts it for you.
 
 ### 1. Migrate Grafana Dashboards With percli
 
@@ -26,8 +26,29 @@ The module starts at its landing page, which also launches the playground. The p
 
 1. How Migration Works
 2. Translating Panels And Variables
-3. Finishing A Migration, followed by the lab **Migrate Two Grafana Dashboards**
-4. Summary
+3. Checking The Layout And Counts Of A Migrated Dashboard
+4. Finishing A Migration, followed by the lab **Migrate Two Grafana Dashboards**
+5. Summary
+
+### 2. Read And Reshape A Migrated Dashboard
+
+The module starts at its landing page, which also launches the playground. The playground holds a Grafana dashboard with collapsed and open rows and the Perses project `legacy`.
+
+1. Panel Keys And Layout Items
+2. Splitting Layout Groups
+3. Variables After Migration
+4. Cleaning Up Variables, followed by the lab **Group Migrated Panels Into Rows**
+5. Summary
+
+### 3. Migrate With Inputs, Projects And Output Formats
+
+The module starts at its landing page, which also launches the playground. The playground holds a Grafana folder with several dashboards and the Perses project `shared`.
+
+1. Grafana Inputs And The Input Flag
+2. Projects And The Default Datasource
+3. Output Formats And Custom Resources
+4. Migrating A Whole Folder, followed by the lab **Migrate Every Dashboard In A Folder**
+5. Summary
 
 ## Section capstone: Migrate A Shared Dashboard Export
 

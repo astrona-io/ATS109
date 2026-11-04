@@ -15,15 +15,37 @@ A migrated dashboard that opens without an error is not yet a correct dashboard.
 
 ## The learning path
 
-The module has a landing page, two short parts, a graded lab right after the part it tests, and a summary. The module also has its own playground, and the landing page starts it for you.
+Each module has a landing page, four short parts, a graded lab right after the part it tests, and a summary. Each module also has its own playground, and the landing page starts it for you.
 
 ### 1. Check That A Migrated Dashboard Shows The Same Data
 
 The module starts at its landing page, which also launches the playground. The playground holds the Grafana dashboard `API Latency` and its migrated Perses version in the project `parity`.
 
 1. Running The Same Query In Both Tools
-2. What Changes The Picture Besides The Query, followed by the lab **Restore Query Parity After A Migration**
-3. Summary
+2. Comparing Every Panel In A Loop
+3. Reading A Parity Failure
+4. What Changes The Picture Besides The Query, followed by the lab **Restore Query Parity After A Migration**
+5. Summary
+
+### 2. Compare What The Reader Sees
+
+The module starts at its landing page, which also launches the playground. The playground holds the Grafana dashboard `API Latency` and a Perses copy whose display settings you compare.
+
+1. Units And Number Formats
+2. Legends And Series Names
+3. Thresholds And Calculations
+4. Time Range, Step And Refresh, followed by the lab **Fix The Display Drift In api-latency**
+5. Summary
+
+### 3. Build A Release Check
+
+The module starts at its landing page, which also launches the playground. The playground holds the dashboard `service-health` in Grafana and in the Perses project `release`.
+
+1. What To Check Before A Release
+2. Finding Placeholders And Missing Datasources
+3. One Check Script
+4. Reading The Report, followed by the lab **Find And Fix The Panels That Differ**
+5. Summary
 
 ## Section capstone: Prove Parity For A Migrated Dashboard
 

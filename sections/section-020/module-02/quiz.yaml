@@ -1,0 +1,245 @@
+# Knowledge check for module 020-02. Listed in astrona.yaml as a `type: quiz` entry after the module summary.
+schema_version: 1
+kind: question_bank
+id: ats109-020-02
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: module
+  id: section-020/module-02
+  title: "Group Migrated Panels Into Rows"
+placement:
+  position: after
+  reading: sections/section-020/module-02/course-05-summary.md
+questions:
+  - id: ats109-020-02-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain panel keys"
+    source_readings:
+      - sections/section-020/module-02/course-01-panel-keys-and-layout-items.md
+    prompt: "How does the migration name the key of a top-level panel?"
+    options:
+      - id: a
+        text: "By its position in the Grafana panels list, counted from zero."
+        explanation: "Correct. The key carries no meaning of its own."
+      - id: b
+        text: "By the panel title."
+        explanation: "Not correct. Titles are in the display name."
+      - id: c
+        text: "By a random identifier."
+        explanation: "Not correct. The key is the position."
+      - id: d
+        text: "By the Grafana panel id."
+        explanation: "Not correct. The position is used."
+    correct_option: a
+    explanation: "Correct. The key carries no meaning of its own."
+
+  - id: ats109-020-02-q02
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Read a row panel key"
+    source_readings:
+      - sections/section-020/module-02/course-01-panel-keys-and-layout-items.md
+    prompt: "Which key does the first panel inside the collapsed row at position 7 get?"
+    options:
+      - id: a
+        text: "70"
+        explanation: "Not correct. The underscore is needed."
+      - id: b
+        text: "7_0"
+        explanation: "Correct. The row position and the position in the row, joined by an underscore."
+      - id: c
+        text: "8"
+        explanation: "Not correct. It is not a top-level key."
+      - id: d
+        text: "row7"
+        explanation: "Not correct. The format is two numbers."
+    correct_option: b
+    explanation: "Correct. The row position and the position in the row, joined by an underscore."
+
+  - id: ats109-020-02-q03
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know which rows become groups"
+    source_readings:
+      - sections/section-020/module-02/course-02-splitting-layout-groups.md
+    prompt: "Which Grafana rows become their own Grid group in the migration?"
+    options:
+      - id: a
+        text: "All rows."
+        explanation: "Not correct. Open rows are dropped."
+      - id: b
+        text: "Only open rows."
+        explanation: "Not correct. Open rows are dropped."
+      - id: c
+        text: "Collapsed rows."
+        explanation: "Correct. Only a collapsed row stores its panels inside it."
+      - id: d
+        text: "No rows."
+        explanation: "Not correct. Collapsed rows are kept."
+    correct_option: c
+    explanation: "Correct. Only a collapsed row stores its panels inside it."
+
+  - id: ats109-020-02-q04
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Start a group closed"
+    source_readings:
+      - sections/section-020/module-02/course-02-splitting-layout-groups.md
+    prompt: "Which field makes a Grid group start closed?"
+    options:
+      - id: a
+        text: "display.title set to closed"
+        explanation: "Not correct. The title is a heading."
+      - id: b
+        text: "items set to an empty list"
+        explanation: "Not correct. That removes the panels from view."
+      - id: c
+        text: "collapse.close set to true"
+        explanation: "Not correct. No such field exists."
+      - id: d
+        text: "display.collapse.open set to false"
+        explanation: "Correct. The flag says whether the group starts open."
+    correct_option: d
+    explanation: "Correct. The flag says whether the group starts open."
+
+  - id: ats109-020-02-q05
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Check a regrouped layout"
+    source_readings:
+      - sections/section-020/module-02/course-02-splitting-layout-groups.md
+    prompt: "After you split a group, what proves that no panel was lost or used twice?"
+    options:
+      - id: a
+        text: "The layout refs equal the panel keys, each used once."
+        explanation: "Correct. Every key appears exactly once."
+      - id: b
+        text: "The dashboard has three groups."
+        explanation: "Not correct. The count of groups proves nothing about panels."
+      - id: c
+        text: "percli apply printed a line."
+        explanation: "Not correct. Apply accepts a missing panel."
+      - id: d
+        text: "The duration is 1h."
+        explanation: "Not correct. It is unrelated."
+    correct_option: a
+    explanation: "Correct. Every key appears exactly once."
+
+  - id: ats109-020-02-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know the adhoc variable result"
+    source_readings:
+      - sections/section-020/module-02/course-03-variables-after-migration.md
+    prompt: "What does the migration make of a Grafana adhoc variable?"
+    options:
+      - id: a
+        text: "A TextVariable."
+        explanation: "Not correct. Text variables come from textbox and constant."
+      - id: b
+        text: "A StaticListVariable with the values grafana, migration, not and supported."
+        explanation: "Correct. It has no Perses equivalent."
+      - id: c
+        text: "A DatasourceVariable."
+        explanation: "Not correct. That comes from a datasource variable."
+      - id: d
+        text: "Nothing; it is dropped silently."
+        explanation: "Not correct. A placeholder is written."
+    correct_option: b
+    explanation: "Correct. It has no Perses equivalent."
+
+  - id: ats109-020-02-q07
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know the interval variable result"
+    source_readings:
+      - sections/section-020/module-02/course-03-variables-after-migration.md
+    prompt: "Which Perses variable plugin does a Grafana interval variable become?"
+    options:
+      - id: a
+        text: "PrometheusLabelValuesVariable"
+        explanation: "Not correct. That comes from label_values."
+      - id: b
+        text: "TextVariable"
+        explanation: "Not correct. That comes from textbox."
+      - id: c
+        text: "StaticListVariable"
+        explanation: "Correct. Its values become a fixed list."
+      - id: d
+        text: "DatasourceVariable"
+        explanation: "Not correct. That comes from datasource."
+    correct_option: c
+    explanation: "Correct. Its values become a fixed list."
+
+  - id: ats109-020-02-q08
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know the label_values result"
+    source_readings:
+      - sections/section-020/module-02/course-03-variables-after-migration.md
+    prompt: "Which Perses plugin does the Grafana query label_values(up, job) become?"
+    options:
+      - id: a
+        text: "StaticListVariable"
+        explanation: "Not correct. That is a fixed list."
+      - id: b
+        text: "PrometheusLabelNamesVariable"
+        explanation: "Not correct. That comes from label_names()."
+      - id: c
+        text: "TextVariable"
+        explanation: "Not correct. That holds a typed value."
+      - id: d
+        text: "PrometheusLabelValuesVariable"
+        explanation: "Correct. The label name and the matcher are carried over."
+    correct_option: d
+    explanation: "Correct. The label name and the matcher are carried over."
+
+  - id: ats109-020-02-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Remove a variable safely"
+    source_readings:
+      - sections/section-020/module-02/course-04-cleaning-up-variables.md
+    prompt: "Before you remove a migrated variable, what must you check?"
+    options:
+      - id: a
+        text: "That no query uses it."
+        explanation: "Correct. A query with an undefined variable fails."
+      - id: b
+        text: "That its name is short."
+        explanation: "Not correct. Length does not matter."
+      - id: c
+        text: "That the dashboard has one group."
+        explanation: "Not correct. Groups are unrelated."
+      - id: d
+        text: "That the project has a datasource."
+        explanation: "Not correct. The datasource is unrelated."
+    correct_option: a
+    explanation: "Correct. A query with an undefined variable fails."
+
+  - id: ats109-020-02-q10
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know what a closed group does"
+    source_readings:
+      - sections/section-020/module-02/course-02-splitting-layout-groups.md
+    prompt: "What does closing a group change?"
+    options:
+      - id: a
+        text: "It deletes the panels."
+        explanation: "Not correct. The panels stay."
+      - id: b
+        text: "Whether the panels are shown at first; the layout still holds them."
+        explanation: "Correct. Only the layout decides where a panel appears."
+      - id: c
+        text: "It stops the queries from existing."
+        explanation: "Not correct. The queries stay in the panels."
+      - id: d
+        text: "It renames the group."
+        explanation: "Not correct. The title does not change."
+    correct_option: b
+    explanation: "Correct. Only the layout decides where a panel appears."

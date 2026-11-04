@@ -79,8 +79,11 @@ modules:
         title: "Panels, Queries And Layouts"
         path: sections/section-010/module-01/course-02-panels-queries-and-layouts.md
       - type: reading
+        title: "Reading The Grafana Dashboard JSON"
+        path: sections/section-010/module-01/course-03-reading-the-grafana-dashboard-json.md
+      - type: reading
         title: "Variables, Datasources And Plugin Schemas"
-        path: sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+        path: sections/section-010/module-01/course-04-variables-datasources-and-plugin-schemas.md
       - type: reading
         title: Question
         path: sections/section-010/module-01/labs/lab-01/question.md
@@ -105,7 +108,93 @@ modules:
             url: https://perses.dev/perses/docs/api/variable/
       - type: reading
         title: Summary
-        path: sections/section-010/module-01/course-04-summary.md
+        path: sections/section-010/module-01/course-05-summary.md
+
+      - type: reading
+        title: "Choose And Configure Panel Plugins"
+        path: sections/section-010/module-02/course.md
+      - type: reading
+        title: "Time Series Chart Settings"
+        path: sections/section-010/module-02/course-01-time-series-chart-settings.md
+      - type: reading
+        title: "Stat, Gauge And Bar Charts"
+        path: sections/section-010/module-02/course-02-stat-gauge-and-bar-charts.md
+      - type: reading
+        title: "Table, Markdown And Pie Charts"
+        path: sections/section-010/module-02/course-03-table-markdown-and-pie-charts.md
+      - type: reading
+        title: "Units, Thresholds And Choosing A Plugin"
+        path: sections/section-010/module-02/course-04-units-thresholds-and-choosing-a-plugin.md
+      - type: reading
+        title: Question
+        path: sections/section-010/module-02/labs/lab-01/question.md
+      - type: lab
+        title: "Build A Runtime Dashboard With Four Panel Plugins Lab"
+        path: sections/section-010/module-02/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: specification
+        task_kind: build
+        tags: [panels, dashboard-spec, units, thresholds, calculations, validation]
+        learning_goals:
+          - Choose the panel plugin that fits each of four Grafana panels
+          - Set units, thresholds and calculations in the unit of the value
+          - Prove the dashboard with server validation and queries that return data
+        resources:
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+          - name: "Open specification"
+            url: https://perses.dev/perses/docs/concepts/open-specification/
+      - type: reading
+        title: "Summary"
+        path: sections/section-010/module-02/course-05-summary.md
+      - type: quiz
+        title: "Knowledge Check: Build A Runtime Dashboard With Four Panel Plugins"
+        path: sections/section-010/module-02/quiz.yaml
+        pass_score: 70
+
+      - type: reading
+        title: "Work With Variables, Datasources And Validation"
+        path: sections/section-010/module-03/course.md
+      - type: reading
+        title: "List And Text Variables"
+        path: sections/section-010/module-03/course-01-list-and-text-variables.md
+      - type: reading
+        title: "Chained Variables And Matchers"
+        path: sections/section-010/module-03/course-02-chained-variables-and-matchers.md
+      - type: reading
+        title: "Datasources And Scopes"
+        path: sections/section-010/module-03/course-03-datasources-and-scopes.md
+      - type: reading
+        title: "Validating A Dashboard Without Applying It"
+        path: sections/section-010/module-03/course-04-validating-a-dashboard-without-applying.md
+      - type: reading
+        title: Question
+        path: sections/section-010/module-03/labs/lab-01/question.md
+      - type: lab
+        title: "Build A Dashboard With Chained Variables Lab"
+        path: sections/section-010/module-03/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: specification
+        task_kind: build
+        tags: [variables, dashboard-spec, datasource-ref, validation, panels]
+        learning_goals:
+          - Write a list variable and a second variable that depends on it
+          - Use the variables in panel queries so the All choice matches every value
+          - Validate the dashboard on the server and run its queries
+        resources:
+          - name: "Variable API"
+            url: https://perses.dev/perses/docs/api/variable/
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+      - type: reading
+        title: "Summary"
+        path: sections/section-010/module-03/course-05-summary.md
+      - type: quiz
+        title: "Knowledge Check: Build A Dashboard With Chained Variables"
+        path: sections/section-010/module-03/quiz.yaml
+        pass_score: 70
 
       - type: reading
         title: Question
@@ -157,8 +246,11 @@ modules:
         title: "Translating Panels And Variables"
         path: sections/section-020/module-01/course-02-translating-panels-and-variables.md
       - type: reading
+        title: "Checking The Layout And Counts Of A Migrated Dashboard"
+        path: sections/section-020/module-01/course-03-checking-the-layout-and-counts-of-a-migrated-dashboard.md
+      - type: reading
         title: "Finishing A Migration"
-        path: sections/section-020/module-01/course-03-finishing-a-migration.md
+        path: sections/section-020/module-01/course-04-finishing-a-migration.md
       - type: reading
         title: Question
         path: sections/section-020/module-01/labs/lab-01/question.md
@@ -183,7 +275,95 @@ modules:
             url: https://perses.dev/perses/docs/cli/
       - type: reading
         title: Summary
-        path: sections/section-020/module-01/course-04-summary.md
+        path: sections/section-020/module-01/course-05-summary.md
+
+      - type: reading
+        title: "Read And Reshape A Migrated Dashboard"
+        path: sections/section-020/module-02/course.md
+      - type: reading
+        title: "Panel Keys And Layout Items"
+        path: sections/section-020/module-02/course-01-panel-keys-and-layout-items.md
+      - type: reading
+        title: "Splitting Layout Groups"
+        path: sections/section-020/module-02/course-02-splitting-layout-groups.md
+      - type: reading
+        title: "Variables After Migration"
+        path: sections/section-020/module-02/course-03-variables-after-migration.md
+      - type: reading
+        title: "Cleaning Up Variables"
+        path: sections/section-020/module-02/course-04-cleaning-up-variables.md
+      - type: reading
+        title: Question
+        path: sections/section-020/module-02/labs/lab-01/question.md
+      - type: lab
+        title: "Group Migrated Panels Into Rows Lab"
+        path: sections/section-020/module-02/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: migration
+        task_kind: migration
+        tags: [rows, layouts, panels, variables, percli-migrate, grafana-json]
+        learning_goals:
+          - Read the panel keys and layout items of a migrated dashboard
+          - Split one Grid into groups that match the Grafana rows
+          - Keep every panel and variable unchanged while the layout changes
+        resources:
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+      - type: reading
+        title: "Summary"
+        path: sections/section-020/module-02/course-05-summary.md
+      - type: quiz
+        title: "Knowledge Check: Group Migrated Panels Into Rows"
+        path: sections/section-020/module-02/quiz.yaml
+        pass_score: 70
+
+      - type: reading
+        title: "Migrate With Inputs, Projects And Output Formats"
+        path: sections/section-020/module-03/course.md
+      - type: reading
+        title: "Grafana Inputs And The Input Flag"
+        path: sections/section-020/module-03/course-01-grafana-inputs-and-the-input-flag.md
+      - type: reading
+        title: "Projects And The Default Datasource"
+        path: sections/section-020/module-03/course-02-projects-and-the-default-datasource.md
+      - type: reading
+        title: "Output Formats And Custom Resources"
+        path: sections/section-020/module-03/course-03-output-formats-and-custom-resources.md
+      - type: reading
+        title: "Migrating A Whole Folder"
+        path: sections/section-020/module-03/course-04-migrating-a-whole-folder.md
+      - type: reading
+        title: Question
+        path: sections/section-020/module-03/labs/lab-01/question.md
+      - type: lab
+        title: "Migrate Every Dashboard In A Folder Lab"
+        path: sections/section-020/module-03/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: migration
+        task_kind: migration
+        tags: [percli-migrate, migrate-api, grafana-json, datasource-ref, panels]
+        learning_goals:
+          - List the dashboards of one Grafana folder with the Grafana search API
+          - Migrate each one with the default datasource and apply it to a project
+          - Check the panel counts and leave Grafana unchanged
+        resources:
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/
+          - name: "Migrate API"
+            url: https://perses.dev/perses/docs/api/migrate/
+          - name: "Perses CLI"
+            url: https://perses.dev/perses/docs/cli/
+      - type: reading
+        title: "Summary"
+        path: sections/section-020/module-03/course-05-summary.md
+      - type: quiz
+        title: "Knowledge Check: Migrate Every Dashboard In A Folder"
+        path: sections/section-020/module-03/quiz.yaml
+        pass_score: 70
 
       - type: reading
         title: Question
@@ -231,8 +411,14 @@ modules:
         title: "Running The Same Query In Both Tools"
         path: sections/section-030/module-01/course-01-running-the-same-query-in-both-tools.md
       - type: reading
+        title: "Comparing Every Panel In A Loop"
+        path: sections/section-030/module-01/course-02-comparing-every-panel-in-a-loop.md
+      - type: reading
+        title: "Reading A Parity Failure"
+        path: sections/section-030/module-01/course-03-reading-a-parity-failure.md
+      - type: reading
         title: "What Changes The Picture Besides The Query"
-        path: sections/section-030/module-01/course-02-what-changes-the-picture.md
+        path: sections/section-030/module-01/course-04-what-changes-the-picture.md
       - type: reading
         title: Question
         path: sections/section-030/module-01/labs/lab-01/question.md
@@ -255,7 +441,93 @@ modules:
             url: https://perses.dev/perses/docs/migration/
       - type: reading
         title: Summary
-        path: sections/section-030/module-01/course-03-summary.md
+        path: sections/section-030/module-01/course-05-summary.md
+
+      - type: reading
+        title: "Compare What The Reader Sees"
+        path: sections/section-030/module-02/course.md
+      - type: reading
+        title: "Units And Number Formats"
+        path: sections/section-030/module-02/course-01-units-and-number-formats.md
+      - type: reading
+        title: "Legends And Series Names"
+        path: sections/section-030/module-02/course-02-legends-and-series-names.md
+      - type: reading
+        title: "Thresholds And Calculations"
+        path: sections/section-030/module-02/course-03-thresholds-and-calculations.md
+      - type: reading
+        title: "Time Range, Step And Refresh"
+        path: sections/section-030/module-02/course-04-time-range-step-and-refresh.md
+      - type: reading
+        title: Question
+        path: sections/section-030/module-02/labs/lab-01/question.md
+      - type: lab
+        title: "Fix The Display Drift In api-latency Lab"
+        path: sections/section-030/module-02/labs/lab-01
+        difficulty: intermediate
+        estimated_duration: 30m
+        topic: parity
+        task_kind: troubleshooting
+        tags: [units, thresholds, calculations, time-range, legend, query-parity]
+        learning_goals:
+          - Compare units, thresholds, legends and the time range of two dashboards
+          - Correct the Perses dashboard so the reader sees the same numbers and colours
+          - Prove that the queries still return the Grafana series
+        resources:
+          - name: "Dashboard API and specification"
+            url: https://perses.dev/perses/docs/api/dashboard/
+          - name: "Proxy"
+            url: https://perses.dev/perses/docs/concepts/proxy/
+      - type: reading
+        title: "Summary"
+        path: sections/section-030/module-02/course-05-summary.md
+      - type: quiz
+        title: "Knowledge Check: Fix The Display Drift In api-latency"
+        path: sections/section-030/module-02/quiz.yaml
+        pass_score: 70
+
+      - type: reading
+        title: "Build A Release Check"
+        path: sections/section-030/module-03/course.md
+      - type: reading
+        title: "What To Check Before A Release"
+        path: sections/section-030/module-03/course-01-what-to-check-before-a-release.md
+      - type: reading
+        title: "Finding Placeholders And Missing Datasources"
+        path: sections/section-030/module-03/course-02-finding-placeholders-and-missing-datasources.md
+      - type: reading
+        title: "One Check Script"
+        path: sections/section-030/module-03/course-03-one-check-script.md
+      - type: reading
+        title: "Reading The Report"
+        path: sections/section-030/module-03/course-04-reading-the-report.md
+      - type: reading
+        title: Question
+        path: sections/section-030/module-03/labs/lab-01/question.md
+      - type: lab
+        title: "Find And Fix The Panels That Differ Lab"
+        path: sections/section-030/module-03/labs/lab-01
+        difficulty: advanced
+        estimated_duration: 35m
+        topic: parity
+        task_kind: troubleshooting
+        tags: [query-parity, placeholder, datasource-proxy, grafana-json, panels]
+        learning_goals:
+          - Run a release check that reports every panel that differs from Grafana
+          - Fix a query on the wrong metric and a changed rate window
+          - Record the exact list of mismatching panels in a report
+        resources:
+          - name: "Proxy"
+            url: https://perses.dev/perses/docs/concepts/proxy/
+          - name: "Migrate from Grafana"
+            url: https://perses.dev/perses/docs/migration/
+      - type: reading
+        title: "Summary"
+        path: sections/section-030/module-03/course-05-summary.md
+      - type: quiz
+        title: "Knowledge Check: Find And Fix The Panels That Differ"
+        path: sections/section-030/module-03/quiz.yaml
+        pass_score: 70
 
       - type: reading
         title: Question

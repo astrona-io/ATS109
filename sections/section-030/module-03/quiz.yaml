@@ -1,0 +1,245 @@
+# Knowledge check for module 030-03. Listed in astrona.yaml as a `type: quiz` entry after the module summary.
+schema_version: 1
+kind: question_bank
+id: ats109-030-03
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: module
+  id: section-030/module-03
+  title: "Find And Fix The Panels That Differ"
+placement:
+  position: after
+  reading: sections/section-030/module-03/course-05-summary.md
+questions:
+  - id: ats109-030-03-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Order the release checks"
+    source_readings:
+      - sections/section-030/module-03/course-01-what-to-check-before-a-release.md
+    prompt: "What is the order of the four release checks?"
+    options:
+      - id: a
+        text: "Validity, placeholders, datasources, parity."
+        explanation: "Correct. From cheapest to most expensive."
+      - id: b
+        text: "Parity, validity, placeholders, datasources."
+        explanation: "Not correct. Parity costs most and comes last."
+      - id: c
+        text: "Datasources, parity, validity, placeholders."
+        explanation: "Not correct. Validity comes first."
+      - id: d
+        text: "Placeholders, parity, datasources, validity."
+        explanation: "Not correct. The order runs cheap to costly."
+    correct_option: a
+    explanation: "Correct. From cheapest to most expensive."
+
+  - id: ats109-030-03-q02
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know the placeholder panel"
+    source_readings:
+      - sections/section-030/module-03/course-02-finding-placeholders-and-missing-datasources.md
+    prompt: "Which text does a placeholder Markdown panel contain?"
+    options:
+      - id: a
+        text: "TODO"
+        explanation: "Not correct. No such text is written."
+      - id: b
+        text: "Migration from Grafana not supported !"
+        explanation: "Correct. The migration writes it for unsupported types."
+      - id: c
+        text: "No data"
+        explanation: "Not correct. That is a panel message."
+      - id: d
+        text: "Panel removed"
+        explanation: "Not correct. The panel is kept."
+    correct_option: b
+    explanation: "Correct. The migration writes it for unsupported types."
+
+  - id: ats109-030-03-q03
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know the placeholder query"
+    source_readings:
+      - sections/section-030/module-03/course-02-finding-placeholders-and-missing-datasources.md
+    prompt: "Which text does a placeholder query contain?"
+    options:
+      - id: a
+        text: "up"
+        explanation: "Not correct. That is a real metric."
+      - id: b
+        text: "not_found"
+        explanation: "Not correct. It is not written."
+      - id: c
+        text: "migration_from_grafana_not_supported"
+        explanation: "Correct. A query no plugin matches gets it."
+      - id: d
+        text: "grafana_query"
+        explanation: "Not correct. It is not written."
+    correct_option: c
+    explanation: "Correct. A query no plugin matches gets it."
+
+  - id: ats109-030-03-q04
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Know the placeholder variable"
+    source_readings:
+      - sections/section-030/module-03/course-02-finding-placeholders-and-missing-datasources.md
+    prompt: "Which values does a placeholder variable have?"
+    options:
+      - id: a
+        text: "a, b, c, d"
+        explanation: "Not correct. They are not written."
+      - id: b
+        text: "none"
+        explanation: "Not correct. The list is not empty."
+      - id: c
+        text: "1m, 5m, 15m"
+        explanation: "Not correct. These are a real interval list."
+      - id: d
+        text: "grafana, migration, not, supported"
+        explanation: "Correct. It is a StaticListVariable with these four values."
+    correct_option: d
+    explanation: "Correct. It is a StaticListVariable with these four values."
+
+  - id: ats109-030-03-q05
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Use the same time"
+    source_readings:
+      - sections/section-030/module-03/course-03-one-check-script.md
+    prompt: "Why does the script send the same time to every query?"
+    options:
+      - id: a
+        text: "A counter keeps growing, so two times give different values."
+        explanation: "Correct. Equal time gives equal data."
+      - id: b
+        text: "Prometheus needs a time."
+        explanation: "Not correct. It has a default."
+      - id: c
+        text: "It makes the script faster."
+        explanation: "Not correct. Speed is not the reason."
+      - id: d
+        text: "Perses refuses queries without it."
+        explanation: "Not correct. It does not refuse."
+    correct_option: a
+    explanation: "Correct. Equal time gives equal data."
+
+  - id: ats109-030-03-q06
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Match panels by title"
+    source_readings:
+      - sections/section-030/module-03/course-03-one-check-script.md
+    prompt: "How does the script match a Grafana panel to a Perses panel?"
+    options:
+      - id: a
+        text: "By key."
+        explanation: "Not correct. Keys can differ."
+      - id: b
+        text: "By title."
+        explanation: "Correct. The keys are positions that change."
+      - id: c
+        text: "By position."
+        explanation: "Not correct. Positions can differ."
+      - id: d
+        text: "By colour."
+        explanation: "Not correct. Colour is not an identity."
+    correct_option: b
+    explanation: "Correct. The keys are positions that change."
+
+  - id: ats109-030-03-q07
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Spot a placeholder by its query"
+    source_readings:
+      - sections/section-030/module-03/course-01-what-to-check-before-a-release.md
+    prompt: "What does a placeholder Markdown panel from the migration have instead of queries?"
+    options:
+      - id: a
+        text: "Two empty queries."
+        explanation: "Not correct. Queries is null."
+      - id: b
+        text: "The Grafana queries."
+        explanation: "Not correct. They are lost."
+      - id: c
+        text: "queries set to null"
+        explanation: "Correct. The queries are not migrated."
+      - id: d
+        text: "A default query."
+        explanation: "Not correct. None is written."
+    correct_option: c
+    explanation: "Correct. The queries are not migrated."
+
+  - id: ats109-030-03-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Use the datasource proxy"
+    source_readings:
+      - sections/section-030/module-03/course-03-one-check-script.md
+    prompt: "Which path runs a query through the datasource of a project?"
+    options:
+      - id: a
+        text: "/api/v1/query"
+        explanation: "Not correct. It lacks the proxy prefix."
+      - id: b
+        text: "/api/migrate"
+        explanation: "Not correct. That migrates dashboards."
+      - id: c
+        text: "/api/validate/dashboards"
+        explanation: "Not correct. That validates dashboards."
+      - id: d
+        text: "/proxy/projects/<project>/datasources/<name>/api/v1/query"
+        explanation: "Correct. The proxy forwards the request to the datasource."
+    correct_option: d
+    explanation: "Correct. The proxy forwards the request to the datasource."
+
+  - id: ats109-030-03-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Round before comparing"
+    source_readings:
+      - sections/section-030/module-03/course-03-one-check-script.md
+    prompt: "Why does the script round values before it compares them?"
+    options:
+      - id: a
+        text: "A tiny difference in the last digits is not a mismatch."
+        explanation: "Correct. Floating point text can differ."
+      - id: b
+        text: "To hide real faults."
+        explanation: "Not correct. It hides only noise."
+      - id: c
+        text: "To save space."
+        explanation: "Not correct. Space is not the reason."
+      - id: d
+        text: "Because jq cannot compare."
+        explanation: "Not correct. It can."
+    correct_option: a
+    explanation: "Correct. Floating point text can differ."
+
+  - id: ats109-030-03-q10
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Report every fault"
+    source_readings:
+      - sections/section-030/module-03/course-04-reading-the-report.md
+    prompt: "What should a release report contain for each failing panel?"
+    options:
+      - id: a
+        text: "Only a count."
+        explanation: "Not correct. A count names no panel."
+      - id: b
+        text: "The panel name and the kind of fault."
+        explanation: "Correct. The person who fixes it needs the name."
+      - id: c
+        text: "Only the first failure."
+        explanation: "Not correct. Every fault is listed."
+      - id: d
+        text: "Only the dashboard name."
+        explanation: "Not correct. The panel is needed."
+    correct_option: b
+    explanation: "Correct. The person who fixes it needs the name."

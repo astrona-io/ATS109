@@ -4,7 +4,7 @@ A migration tool is only as good as your understanding of what it did. `percli m
 
 This module runs the migration on two Grafana dashboards and reads the result field by field. Keep one sentence in mind: **the migration translates what a plugin knows how to translate, marks everything else with a placeholder, and leaves the finishing to you.** The translation rules are not inside `percli`; each Perses plugin ships its own migration rules, and the Perses server runs them.
 
-The module has three parts. **How Migration Works** runs `percli migrate` against the Perses server and follows the dashboard's name, time range, panels and rows through the translation. **Translating Panels And Variables** goes through which Grafana panel types, queries and variables become which Perses plugins, and what the placeholders look like. **Finishing A Migration** replaces the placeholders, fixes the datasource names, and applies the result to a project; a graded lab follows it.
+The module has four parts. **How Migration Works** runs `percli migrate` against the Perses server and follows the dashboard's name, time range, panels and rows through the translation. **Translating Panels And Variables** goes through which Grafana panel types, queries and variables become which Perses plugins, and what the placeholders look like. **Checking The Layout And Counts Of A Migrated Dashboard** counts panels on both sides and reads the layout groups. **Finishing A Migration** replaces the placeholders, fixes the datasource names, and applies the result to a project; a graded lab follows it.
 
 ## Learning objectives
 

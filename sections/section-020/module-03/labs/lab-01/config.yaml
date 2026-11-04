@@ -1,0 +1,58 @@
+# Migrate Every Dashboard In A Folder
+# Astrona graded lab. Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-lab-020-03"
+  docs:
+    guide: "solution.md"
+    solution: "solution.md"
+    question: "question.md"
+    examQuestion: "question.md"
+    prerequisites: "prerequisites.md"
+bootstrap:
+  init:
+    - name: "install-perses"
+      description: "Installs Helm 3.22.1, percli and Perses v0.54.0, Prometheus and Grafana 12.4.13"
+      type: "file"
+      source: "bootstrap/01-install-perses.sh"
+    - name: "ats-109-lab-020-03-setup"
+      description: "Creates the starting state the task works from"
+      type: "file"
+      source: "bootstrap/02-seed-state.sh"
+testing:
+  init:
+    - name: "wait-for-perses"
+      description: "Waits until Perses and Grafana answer from the tester pod"
+      type: "file"
+      source: "testing/wait-for-perses.sh"
+    - name: "reference-solution"
+      description: "The remediation a correct learner performs; used by `astrona test`"
+      type: "file"
+      source: "solution/apply.sh"
+validation:
+  scripts:
+    - name: "validate-dashboards-exist"
+      description: "Confirms exactly the dashboards prometheus-overview and prometheus-storage exist in shared, are valid and keep their Grafana titles"
+      type: "file"
+      source: "validation/validate-dashboards-exist.sh"
+    - name: "validate-panel-count"
+      description: "Confirms every migrated dashboard has as many panels as the Grafana dashboard"
+      type: "file"
+      source: "validation/validate-panel-count.sh"
+    - name: "validate-datasource-refs"
+      description: "Confirms no query names a datasource that does not exist in the project"
+      type: "file"
+      source: "validation/validate-datasource-refs.sh"
+    - name: "validate-grafana-unchanged"
+      description: "Confirms the Grafana dashboards were not changed or moved"
+      type: "file"
+      source: "validation/validate-grafana-unchanged.sh"
+teardown:
+  keepCluster: false
+runtime:
+  kind:
+    preloadImages:
+      - docker.io/persesdev/perses:v0.54.0
+      - grafana/grafana:12.4.13
+      - nicolaka/netshoot:v0.13
+      - prom/prometheus:v3.15.1

@@ -19,7 +19,7 @@ You will read a dashboard through the Perses API, write one by hand, and watch t
 
 ## The learning path
 
-The module has a landing page, three short parts, a graded lab right after the part it tests, and a summary. The module also has its own playground, a cluster where you can explore freely, and the landing page starts it for you.
+Each module has a landing page, four short parts, a graded lab right after the part it tests, and a summary. Each module also has its own playground, and the landing page starts it for you.
 
 ### 1. Read And Write The Perses Dashboard Specification
 
@@ -27,8 +27,29 @@ The module starts at its landing page, which also launches the playground. The p
 
 1. What The Open Specification Is
 2. Panels, Queries And Layouts
-3. Variables, Datasources And Plugin Schemas, followed by the lab **Write A Perses Dashboard By Hand**
-4. Summary
+3. Reading The Grafana Dashboard JSON
+4. Variables, Datasources And Plugin Schemas, followed by the lab **Write A Perses Dashboard By Hand**
+5. Summary
+
+### 2. Choose And Configure Panel Plugins
+
+The module starts at its landing page, which also launches the playground. The playground holds the Perses project `specs` and a Grafana dashboard with several panel types.
+
+1. Time Series Chart Settings
+2. Stat, Gauge And Bar Charts
+3. Table, Markdown And Pie Charts
+4. Units, Thresholds And Choosing A Plugin, followed by the lab **Build A Runtime Dashboard With Four Panel Plugins**
+5. Summary
+
+### 3. Work With Variables, Datasources And Validation
+
+The module starts at its landing page, which also launches the playground. The playground holds the Perses project `specs` and a Grafana dashboard with variables.
+
+1. List And Text Variables
+2. Chained Variables And Matchers
+3. Datasources And Scopes
+4. Validating A Dashboard Without Applying It, followed by the lab **Build A Dashboard With Chained Variables**
+5. Summary
 
 ## Section capstone: Repair A Hand-Written Dashboard
 

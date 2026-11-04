@@ -134,7 +134,7 @@ questions:
     difficulty: beginner
     learning_objective: "Map Grafana units to Perses units"
     source_readings:
-      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - sections/section-030/module-01/course-04-what-changes-the-picture.md
     prompt: "A query returns 0.02 and Grafana shows it as 2 % with the unit percentunit. Which Perses unit gives the same result?"
     options:
       - id: a
@@ -157,7 +157,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Map Grafana reducers to Perses calculations"
     source_readings:
-      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - sections/section-030/module-01/course-04-what-changes-the-picture.md
     prompt: "Which Perses calculation matches the Grafana reducer lastNotNull?"
     options:
       - id: a
@@ -180,7 +180,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Check thresholds"
     source_readings:
-      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - sections/section-030/module-01/course-04-what-changes-the-picture.md
     prompt: "A stat uses percent-decimal and Grafana turns red at 0.05. Which threshold value must the Perses step have?"
     options:
       - id: a
@@ -203,7 +203,7 @@ questions:
     difficulty: beginner
     learning_objective: "Check the dashboard time settings"
     source_readings:
-      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - sections/section-030/module-01/course-04-what-changes-the-picture.md
     prompt: "Which time settings does a migrated dashboard have until you change them?"
     options:
       - id: a
@@ -226,7 +226,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Check legends"
     source_readings:
-      - sections/section-030/module-01/course-02-what-changes-the-picture.md
+      - sections/section-030/module-01/course-04-what-changes-the-picture.md
     prompt: "A Perses legend loses its label and reads p90 for every line. What is wrong?"
     options:
       - id: a

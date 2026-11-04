@@ -1,0 +1,245 @@
+# Knowledge check for module 010-02. Listed in astrona.yaml as a `type: quiz` entry after the module summary.
+schema_version: 1
+kind: question_bank
+id: ats109-010-02
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: module
+  id: section-010/module-02
+  title: "Choose Panel Plugins, Units And Calculations"
+placement:
+  position: after
+  reading: sections/section-010/module-02/course-05-summary.md
+questions:
+  - id: ats109-010-02-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Set the unit of a time series chart"
+    source_readings:
+      - sections/section-010/module-02/course-01-time-series-chart-settings.md
+    prompt: "Where does a TimeSeriesChart panel set the unit of its values?"
+    options:
+      - id: a
+        text: "In the plugin settings under yAxis.format.unit."
+        explanation: "Correct. The y axis holds the format of the values it draws."
+      - id: b
+        text: "In spec.display.unit of the panel."
+        explanation: "Not correct. The display block holds only the name and description."
+      - id: c
+        text: "In the query, as a label."
+        explanation: "Not correct. A query returns data and does not format it."
+      - id: d
+        text: "In the layout item of the panel."
+        explanation: "Not correct. A layout item holds position and size only."
+    correct_option: a
+    explanation: "Correct. The y axis holds the format of the values it draws."
+
+  - id: ats109-010-02-q02
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Place a legend"
+    source_readings:
+      - sections/section-010/module-02/course-01-time-series-chart-settings.md
+    prompt: "Which setting moves the legend of a TimeSeriesChart below the chart?"
+    options:
+      - id: a
+        text: "yAxis.position set to bottom."
+        explanation: "Not correct. That field places the axis, not the legend."
+      - id: b
+        text: "legend.position set to bottom."
+        explanation: "Correct. The legend block holds the position of the legend."
+      - id: c
+        text: "display.legend set to true."
+        explanation: "Not correct. The panel display block has no legend field."
+      - id: d
+        text: "seriesNameFormat set to bottom."
+        explanation: "Not correct. It names the series."
+    correct_option: b
+    explanation: "Correct. The legend block holds the position of the legend."
+
+  - id: ats109-010-02-q03
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain why a stat needs a calculation"
+    source_readings:
+      - sections/section-010/module-02/course-02-stat-gauge-and-bar-charts.md
+    prompt: "Why does a StatChart panel need a calculation?"
+    options:
+      - id: a
+        text: "The calculation chooses the data source."
+        explanation: "Not correct. The datasource is set on the query."
+      - id: b
+        text: "The calculation sets the unit."
+        explanation: "Not correct. The format field sets the unit."
+      - id: c
+        text: "A query returns many points, and the panel shows one number per series."
+        explanation: "Correct. The calculation reduces each series to one value."
+      - id: d
+        text: "The calculation sorts the panels."
+        explanation: "Not correct. Sorting is a bar chart setting."
+    correct_option: c
+    explanation: "Correct. The calculation reduces each series to one value."
+
+  - id: ats109-010-02-q04
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Name the Perses calculation for Grafana lastNotNull"
+    source_readings:
+      - sections/section-010/module-02/course-02-stat-gauge-and-bar-charts.md
+    prompt: "Which Perses calculation shows the last value of a series, like the Grafana reducer lastNotNull?"
+    options:
+      - id: a
+        text: "lastNotNull"
+        explanation: "Not correct. That is the Grafana name and the server refuses it."
+      - id: b
+        text: "latest"
+        explanation: "Not correct. It is not a calculation name."
+      - id: c
+        text: "tail"
+        explanation: "Not correct. It is not a calculation name."
+      - id: d
+        text: "last-number"
+        explanation: "Correct. The migration maps lastNotNull to last-number."
+    correct_option: d
+    explanation: "Correct. The migration maps lastNotNull to last-number."
+
+  - id: ats109-010-02-q05
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Set the maximum of a gauge"
+    source_readings:
+      - sections/section-010/module-02/course-02-stat-gauge-and-bar-charts.md
+    prompt: "A GaugeChart shows open file descriptors divided by the maximum, a value between 0 and 1. Which setting fits?"
+    options:
+      - id: a
+        text: "Unit percent-decimal with max 1."
+        explanation: "Correct. A fraction of 1 is a whole, so the scale ends at 1."
+      - id: b
+        text: "Unit percent with max 1."
+        explanation: "Not correct. Percent expects values up to 100."
+      - id: c
+        text: "Unit bytes with max 100."
+        explanation: "Not correct. The value is not a size."
+      - id: d
+        text: "No unit and no max."
+        explanation: "Not correct. The gauge cannot draw a full scale."
+    correct_option: a
+    explanation: "Correct. A fraction of 1 is a whole, so the scale ends at 1."
+
+  - id: ats109-010-02-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Write thresholds in the unit of the panel"
+    source_readings:
+      - sections/section-010/module-02/course-04-units-thresholds-and-choosing-a-plugin.md
+    prompt: "A panel has the unit percent-decimal. Which threshold step value means five percent?"
+    options:
+      - id: a
+        text: "5"
+        explanation: "Not correct. With percent-decimal, 5 means five hundred percent."
+      - id: b
+        text: "0.05"
+        explanation: "Correct. Threshold values use the unit of the panel, so 0.05 is five percent."
+      - id: c
+        text: "50"
+        explanation: "Not correct. That is five thousand percent."
+      - id: d
+        text: "0.5"
+        explanation: "Not correct. That is fifty percent."
+    correct_option: b
+    explanation: "Correct. Threshold values use the unit of the panel, so 0.05 is five percent."
+
+  - id: ats109-010-02-q07
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Pick a plugin for values by label"
+    source_readings:
+      - sections/section-010/module-02/course-02-stat-gauge-and-bar-charts.md
+    prompt: "Which panel plugin compares one value for each label, such as the request count for each status code?"
+    options:
+      - id: a
+        text: "Markdown"
+        explanation: "Not correct. It shows text and runs no query."
+      - id: b
+        text: "StaticListVariable"
+        explanation: "Not correct. That is a variable plugin."
+      - id: c
+        text: "BarChart"
+        explanation: "Correct. A bar chart draws one bar per series."
+      - id: d
+        text: "PrometheusDatasource"
+        explanation: "Not correct. That is a datasource plugin."
+    correct_option: c
+    explanation: "Correct. A bar chart draws one bar per series."
+
+  - id: ats109-010-02-q08
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Pick the unit of a fraction"
+    source_readings:
+      - sections/section-010/module-02/course-04-units-thresholds-and-choosing-a-plugin.md
+    prompt: "Which unit shows the value 0.25 as 25%?"
+    options:
+      - id: a
+        text: "percent"
+        explanation: "Not correct. It would show 0.25%."
+      - id: b
+        text: "decimal"
+        explanation: "Not correct. It shows the plain number."
+      - id: c
+        text: "seconds"
+        explanation: "Not correct. It formats a duration."
+      - id: d
+        text: "percent-decimal"
+        explanation: "Correct. It multiplies by 100 and adds the percent sign."
+    correct_option: d
+    explanation: "Correct. It multiplies by 100 and adds the percent sign."
+
+  - id: ats109-010-02-q09
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Name a series from a label"
+    source_readings:
+      - sections/section-010/module-02/course-01-time-series-chart-settings.md
+    prompt: "A query returns one series per handler. Which seriesNameFormat names each series by its handler?"
+    options:
+      - id: a
+        text: "{{handler}}"
+        explanation: "Correct. Double braces insert the value of a label."
+      - id: b
+        text: "$handler"
+        explanation: "Not correct. That is a dashboard variable."
+      - id: c
+        text: "handler"
+        explanation: "Not correct. It would name every series the same."
+      - id: d
+        text: "[handler]"
+        explanation: "Not correct. Brackets have no meaning here."
+    correct_option: a
+    explanation: "Correct. Double braces insert the value of a label."
+
+  - id: ats109-010-02-q10
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Pick the text plugin"
+    source_readings:
+      - sections/section-010/module-02/course-03-table-markdown-and-pie-charts.md
+    prompt: "Which panel plugin shows text that the author writes, with no query?"
+    options:
+      - id: a
+        text: "TimeSeriesChart"
+        explanation: "Not correct. It draws query results."
+      - id: b
+        text: "Markdown"
+        explanation: "Correct. The Markdown panel renders its own text."
+      - id: c
+        text: "GaugeChart"
+        explanation: "Not correct. It shows a query value."
+      - id: d
+        text: "Table"
+        explanation: "Not correct. It lists query results."
+    correct_option: b
+    explanation: "Correct. The Markdown panel renders its own text."

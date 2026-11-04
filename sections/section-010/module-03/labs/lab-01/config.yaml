@@ -1,0 +1,58 @@
+# Build A Dashboard With Chained Variables
+# Astrona graded lab. Schema: internal/config.LabConfig.
+
+metadata:
+  name: "ats-109-lab-010-03"
+  docs:
+    guide: "solution.md"
+    solution: "solution.md"
+    question: "question.md"
+    examQuestion: "question.md"
+    prerequisites: "prerequisites.md"
+bootstrap:
+  init:
+    - name: "install-perses"
+      description: "Installs Helm 3.22.1, percli and Perses v0.54.0, Prometheus and Grafana 12.4.13"
+      type: "file"
+      source: "bootstrap/01-install-perses.sh"
+    - name: "ats-109-lab-010-03-setup"
+      description: "Creates the starting state the task works from"
+      type: "file"
+      source: "bootstrap/02-seed-state.sh"
+testing:
+  init:
+    - name: "wait-for-perses"
+      description: "Waits until Perses and Grafana answer from the tester pod"
+      type: "file"
+      source: "testing/wait-for-perses.sh"
+    - name: "reference-solution"
+      description: "The remediation a correct learner performs; used by `astrona test`"
+      type: "file"
+      source: "solution/apply.sh"
+validation:
+  scripts:
+    - name: "validate-dashboard-valid"
+      description: "Confirms variable-panels exists in the project specs and passes server validation"
+      type: "file"
+      source: "validation/validate-dashboard-valid.sh"
+    - name: "validate-variables"
+      description: "Confirms the variables job, handler and window have the plugins and settings the task asks for"
+      type: "file"
+      source: "validation/validate-variables.sh"
+    - name: "validate-panel-uses-variables"
+      description: "Confirms the panel Request rate uses all three variables and every variable it uses is defined"
+      type: "file"
+      source: "validation/validate-panel-uses-variables.sh"
+    - name: "validate-query-results"
+      description: "Confirms the panel query returns the same series as the expected expression with the variables fixed"
+      type: "file"
+      source: "validation/validate-query-results.sh"
+teardown:
+  keepCluster: false
+runtime:
+  kind:
+    preloadImages:
+      - docker.io/persesdev/perses:v0.54.0
+      - grafana/grafana:12.4.13
+      - nicolaka/netshoot:v0.13
+      - prom/prometheus:v3.15.1

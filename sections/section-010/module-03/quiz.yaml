@@ -1,0 +1,245 @@
+# Knowledge check for module 010-03. Listed in astrona.yaml as a `type: quiz` entry after the module summary.
+schema_version: 1
+kind: question_bank
+id: ats109-010-03
+course_id: ATS109
+exam_code: PERSES
+status: draft
+provenance: Original practice material written for this course; not official exam questions.
+scope:
+  type: module
+  id: section-010/module-03
+  title: "Build A Dashboard With Chained Variables"
+placement:
+  position: after
+  reading: sections/section-010/module-03/course-05-summary.md
+questions:
+  - id: ats109-010-03-q01
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Name the label values variable"
+    source_readings:
+      - sections/section-010/module-03/course-01-list-and-text-variables.md
+    prompt: "Which variable plugin lists the values of one label of a Prometheus series?"
+    options:
+      - id: a
+        text: "PrometheusLabelValuesVariable"
+        explanation: "Correct. It reads label values from the datasource."
+      - id: b
+        text: "StaticListVariable"
+        explanation: "Not correct. It holds a fixed list."
+      - id: c
+        text: "TextVariable"
+        explanation: "Not correct. It holds one typed value."
+      - id: d
+        text: "DatasourceVariable"
+        explanation: "Not correct. It lists datasources."
+    correct_option: a
+    explanation: "Correct. It reads label values from the datasource."
+
+  - id: ats109-010-03-q02
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Name the fixed list variable"
+    source_readings:
+      - sections/section-010/module-03/course-01-list-and-text-variables.md
+    prompt: "Which variable plugin offers the fixed values 1m, 5m and 15m?"
+    options:
+      - id: a
+        text: "PrometheusLabelValuesVariable"
+        explanation: "Not correct. It queries Prometheus."
+      - id: b
+        text: "StaticListVariable"
+        explanation: "Correct. The values are written in the spec."
+      - id: c
+        text: "PrometheusLabelNamesVariable"
+        explanation: "Not correct. It lists label names."
+      - id: d
+        text: "PrometheusPromQLVariable"
+        explanation: "Not correct. It runs a PromQL query."
+    correct_option: b
+    explanation: "Correct. The values are written in the spec."
+
+  - id: ats109-010-03-q03
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Order chained variables"
+    source_readings:
+      - sections/section-010/module-03/course-02-chained-variables-and-matchers.md
+    prompt: "The matcher of the variable handler uses $job. What must be true about the order of the variables?"
+    options:
+      - id: a
+        text: "handler comes before job."
+        explanation: "Not correct. $job would be empty when handler loads."
+      - id: b
+        text: "The order does not matter."
+        explanation: "Not correct. A matcher needs the value first."
+      - id: c
+        text: "job comes before handler in the list."
+        explanation: "Correct. Perses fills the variables in list order."
+      - id: d
+        text: "Both must be in one Grid."
+        explanation: "Not correct. Grids hold panels, not variables."
+    correct_option: c
+    explanation: "Correct. Perses fills the variables in list order."
+
+  - id: ats109-010-03-q04
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Set the All value"
+    source_readings:
+      - sections/section-010/module-03/course-02-chained-variables-and-matchers.md
+    prompt: "A query uses handler=~\"$handler\". Which customAllValue makes the All choice match every handler?"
+    options:
+      - id: a
+        text: "\"all\""
+        explanation: "Not correct. No handler is named all."
+      - id: b
+        text: "\"\""
+        explanation: "Not correct. An empty regular expression matches only empty values."
+      - id: c
+        text: "\"*\""
+        explanation: "Not correct. A bare star is not a valid regular expression."
+      - id: d
+        text: "\".*\""
+        explanation: "Correct. The regular expression .* matches any value."
+    correct_option: d
+    explanation: "Correct. The regular expression .* matches any value."
+
+  - id: ats109-010-03-q05
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Set a default value"
+    source_readings:
+      - sections/section-010/module-03/course-01-list-and-text-variables.md
+    prompt: "Which field selects the value 5m when the dashboard opens?"
+    options:
+      - id: a
+        text: "defaultValue"
+        explanation: "Correct. It names the initial selection."
+      - id: b
+        text: "customAllValue"
+        explanation: "Not correct. It sets what All means."
+      - id: c
+        text: "allowAllValue"
+        explanation: "Not correct. It adds an All choice."
+      - id: d
+        text: "display.name"
+        explanation: "Not correct. It is only a label."
+    correct_option: a
+    explanation: "Correct. It names the initial selection."
+
+  - id: ats109-010-03-q06
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Name the datasource scopes"
+    source_readings:
+      - sections/section-010/module-03/course-03-datasources-and-scopes.md
+    prompt: "In which scopes can a datasource that a query names exist?"
+    options:
+      - id: a
+        text: "Only in the dashboard."
+        explanation: "Not correct. Project and global datasources count too."
+      - id: b
+        text: "In the dashboard, in the project or globally."
+        explanation: "Correct. Perses looks in these three scopes."
+      - id: c
+        text: "Only in the Helm chart values."
+        explanation: "Not correct. Chart values do not define datasources for queries."
+      - id: d
+        text: "Only in the browser."
+        explanation: "Not correct. The server holds them."
+    correct_option: b
+    explanation: "Correct. Perses looks in these three scopes."
+
+  - id: ats109-010-03-q07
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Know the default datasource"
+    source_readings:
+      - sections/section-010/module-03/course-03-datasources-and-scopes.md
+    prompt: "A query names no datasource. Which one does it use?"
+    options:
+      - id: a
+        text: "The first datasource in the alphabet."
+        explanation: "Not correct. Order does not decide."
+      - id: b
+        text: "No datasource, so the panel stays empty."
+        explanation: "Not correct. The default answers."
+      - id: c
+        text: "The default datasource of the project."
+        explanation: "Correct. A query without a name falls back to the default."
+      - id: d
+        text: "A datasource named grafana."
+        explanation: "Not correct. No such rule exists."
+    correct_option: c
+    explanation: "Correct. A query without a name falls back to the default."
+
+  - id: ats109-010-03-q08
+    type: single_choice
+    difficulty: intermediate
+    learning_objective: "Validate without storing"
+    source_readings:
+      - sections/section-010/module-03/course-04-validating-a-dashboard-without-applying.md
+    prompt: "Which API call asks the server to validate a dashboard without storing it?"
+    options:
+      - id: a
+        text: "POST /api/v1/projects/specs/dashboards"
+        explanation: "Not correct. That stores the dashboard."
+      - id: b
+        text: "GET /api/v1/dashboards"
+        explanation: "Not correct. That lists dashboards."
+      - id: c
+        text: "DELETE /api/validate"
+        explanation: "Not correct. No such call exists."
+      - id: d
+        text: "POST /api/validate/dashboards"
+        explanation: "Correct. It answers 200 when the dashboard is valid."
+    correct_option: d
+    explanation: "Correct. It answers 200 when the dashboard is valid."
+
+  - id: ats109-010-03-q09
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Lint online"
+    source_readings:
+      - sections/section-010/module-03/course-04-validating-a-dashboard-without-applying.md
+    prompt: "What does the flag --online add to percli lint?"
+    options:
+      - id: a
+        text: "It sends the file to the server, which checks it with the loaded plugin schemas."
+        explanation: "Correct. The server knows the plugin schemas."
+      - id: b
+        text: "It stores the file in the project."
+        explanation: "Not correct. Lint never stores."
+      - id: c
+        text: "It converts the file to YAML."
+        explanation: "Not correct. It checks the file only."
+      - id: d
+        text: "It opens the file in the browser."
+        explanation: "Not correct. It prints findings in the terminal."
+    correct_option: a
+    explanation: "Correct. The server knows the plugin schemas."
+
+  - id: ats109-010-03-q10
+    type: single_choice
+    difficulty: beginner
+    learning_objective: "Explain allowAllValue"
+    source_readings:
+      - sections/section-010/module-03/course-02-chained-variables-and-matchers.md
+    prompt: "What does allowAllValue: true add to a list variable?"
+    options:
+      - id: a
+        text: "A second variable."
+        explanation: "Not correct. It adds a choice."
+      - id: b
+        text: "An All choice in the list."
+        explanation: "Correct. The reader can pick every value at once."
+      - id: c
+        text: "A default datasource."
+        explanation: "Not correct. It touches no datasource."
+      - id: d
+        text: "A threshold step."
+        explanation: "Not correct. Thresholds belong to panels."
+    correct_option: b
+    explanation: "Correct. The reader can pick every value at once."

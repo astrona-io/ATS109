@@ -180,7 +180,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Configure a list variable"
     source_readings:
-      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+      - sections/section-010/module-01/course-04-variables-datasources-and-plugin-schemas.md
     prompt: "A ListVariable has allowAllValue set to true and its query uses =~\"$code\". What does customAllValue do?"
     options:
       - id: a
@@ -203,7 +203,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Explain datasource lookup"
     source_readings:
-      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+      - sections/section-010/module-01/course-04-variables-datasources-and-plugin-schemas.md
     prompt: "A query names a datasource. In which order does Perses look for it?"
     options:
       - id: a
@@ -226,7 +226,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Validate a dashboard against plugin schemas"
     source_readings:
-      - sections/section-010/module-01/course-03-variables-datasources-and-plugin-schemas.md
+      - sections/section-010/module-01/course-04-variables-datasources-and-plugin-schemas.md
     prompt: "What does percli lint -f file.yaml --online do that lint without --online does not?"
     options:
       - id: a

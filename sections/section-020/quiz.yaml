@@ -203,7 +203,7 @@ questions:
     difficulty: intermediate
     learning_objective: "Use the default datasource"
     source_readings:
-      - sections/section-020/module-01/course-03-finishing-a-migration.md
+      - sections/section-020/module-01/course-04-finishing-a-migration.md
     prompt: "What does --use-default-datasource do in percli migrate?"
     options:
       - id: a
@@ -226,7 +226,7 @@ questions:
     difficulty: advanced
     learning_objective: "Replace a placeholder correctly"
     source_readings:
-      - sections/section-020/module-01/course-03-finishing-a-migration.md
+      - sections/section-020/module-01/course-04-finishing-a-migration.md
     prompt: "How should you fix a placeholder panel such as Series against chunks?"
     options:
       - id: a
